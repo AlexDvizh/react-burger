@@ -1,0 +1,29 @@
+.burger-ingredients {
+    width: 50%;
+}
+
+.ingredients-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 1px rgba(128, 128, 128, 0.6) solid;
+}
+
+.ingredients-item {
+    width: 12vw;
+}
+
+.burger-ingredients-title {
+    text-align: start;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.active {
+    border-bottom: 3px rgba(38, 75, 188) solid;
+}
+
+.title {
+    text-align: start;
+}
+
