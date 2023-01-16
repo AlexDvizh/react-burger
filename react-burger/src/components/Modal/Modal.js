@@ -7,13 +7,13 @@ import ModalOverlay from './ModalOverlay';
 const modalRoot = document.getElementById('modals');
 
 const Modal = (props) => {
-    function handleKeyDown(event) {
-        if(event.code === "Escape") {
-            props.closePopup();
-        }
-    }
-
+    
     useEffect(() => {
+        function handleKeyDown(event) {
+            if(event.code === "Escape") {
+                props.closePopup();
+            }
+        }
         document.body.addEventListener("keydown", handleKeyDown);
         
         return () => {
@@ -27,8 +27,8 @@ const Modal = (props) => {
             <div className={styles.modal}>
                 <div className={styles.modalWrap}>
                     <div className={styles.modalHeader}>
-                        {props.popupType === "ingredientType" ? 
-                            <h1 className={`text text_type_main-large ${styles.modalTitle}`}>Детали ингредиента</h1>
+                        {props.title ? 
+                            <h1 className={`text text_type_main-large ${styles.modalTitle}`}>{props.title}</h1>
                             :
                             <p className={styles.noTitle}></p>
                         }

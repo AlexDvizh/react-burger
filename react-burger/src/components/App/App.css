@@ -1,11 +1,13 @@
 .App {
+  position: relative;
   text-align: center;
+  background-color: #131316;
 }
 
 .main {
-  display: flex;
-  flex-direction: row;
-  width: 70%;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 10px;
+  display: flex;
+  width: 80%;
+  gap: 40px;
 }

@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import './BurgerIngredient.css';
+import { ingredientPropTypes } from "../../utils/prop-types";
+import styles from "./burgerIngredient.module.css";
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../Modal/IngredientDetails';
 
 const BurgerIngredient = (props) => {
-    const ingredientType = "ingredientType";
+    const ingredientModalTitle = "Детали ингредиента";
     const [openPopup, setOpenPopup] = useState(false);
-
-
 
     function handlePopupClose() {
         setOpenPopup(false);
@@ -20,11 +19,11 @@ const BurgerIngredient = (props) => {
     }
     
     return (
-        <section className='burger-ingredient scrollableBox mt-10'>
-            <div className='burger-item mr-10' onClick={handlePopupOpen}>
+        <>
+            <div className={`${styles.burgerItem} mr-10`} onClick={handlePopupOpen}>
                 <Counter count={1} size="default"  />
-                <img src={props.ingredient.image} alt="Изображение булки бургера"/>
-                <div className='burger-price'>
+                <img className="ml-4 mr-4" src={props.ingredient.image} alt="Изображение булки бургера"/>
+                <div className={styles.burgerPrice}>
                     <p className='text text_type_digits-default mr-2'>{props.ingredient.price}</p>
                     <CurrencyIcon type="primary" />
                 </div>
@@ -32,20 +31,22 @@ const BurgerIngredient = (props) => {
             </div>
             {
             openPopup ?
-                
                     <Modal  
                         closePopup={handlePopupClose}
-                        popupType={ingredientType}
+                        title={ingredientModalTitle}
                         ingredient={props.ingredient}
                     >
                         <IngredientDetails ingredient={props.ingredient}/>
                     </Modal>
-                
             :
                 null
             }
-        </section>
+        </>
     )
 }
+
+BurgerIngredient.propTypes = {
+    ingredient: ingredientPropTypes,
+  };
 
 export default BurgerIngredient;

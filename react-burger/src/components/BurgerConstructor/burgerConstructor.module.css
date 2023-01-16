@@ -1,5 +1,14 @@
 .constructor {
-    width: 50%;
+    max-width: 50%;
+    margin-top: 80px;
+}
+
+.constructorWrap {
+    max-height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
 }
 
 .itemWrap {
@@ -12,6 +21,7 @@
     /* justify-content: center; */
     align-items: center;
     margin-bottom: 10px;
+    margin-right: 15px;
 }
 
 .icon {
@@ -25,15 +35,15 @@
 }
   
 .scrollableBox::-webkit-scrollbar {
-width: 10px;
+    width: 10px;
 }
 
 .scrollableBox::-webkit-scrollbar-track {
-background: #2f2f37;
+    background: #2f2f37;
 }
 
 .scrollableBox::-webkit-scrollbar-thumb {
-background: #8585ad;
+    background: #8585ad;
 }
 
 .info {

@@ -25,7 +25,7 @@ const BurgerConstructor = (props) => {
     
     return (
         <section className={styles.constructor}>
-           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '60px', marginLeft: '60px' }}>
+            <div className={styles.constructorWrap}>
                 <div className={styles.itemWrap}>
                     <ConstructorElement
                         type="top"
