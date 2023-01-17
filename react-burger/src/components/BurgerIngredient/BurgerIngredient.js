@@ -34,7 +34,6 @@ const BurgerIngredient = (props) => {
                     <Modal  
                         closePopup={handlePopupClose}
                         title={ingredientModalTitle}
-                        ingredient={props.ingredient}
                     >
                         <IngredientDetails ingredient={props.ingredient}/>
                     </Modal>
@@ -46,7 +45,7 @@ const BurgerIngredient = (props) => {
 }
 
 BurgerIngredient.propTypes = {
-    ingredient: ingredientPropTypes,
-  };
+    ingredient: ingredientPropTypes.isRequired,
+};
 
 export default BurgerIngredient;

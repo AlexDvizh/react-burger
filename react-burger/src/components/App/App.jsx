@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AppHeader from '../AppHeader/AppHeader';
 import { URL } from '../../utils/utils'; 
-import "./App.css";
+import styles from "./app.module.css";
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 
@@ -46,9 +46,9 @@ const App = () => {
   }, [])
   
   return (
-    <div className="App">
+    <div className={styles.App}>
       <AppHeader />
-      <main className='main'>
+      <main className={styles.main}>
         {ingredients.length !== 0 &&
         <>
           <BurgerIngredients burgersInfo={ingredients}/>
