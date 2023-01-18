@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    height: 88px;
+    top: 40px;
+    left: 40px;
+    background-color: #1c1c21;
+}
+
+.headerWrap {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.navigationList {
+    display: flex;
+    align-items: center;
+}
+
+.navigationItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.logo {
+    flex-grow: 0.3;
+}
