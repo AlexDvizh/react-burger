@@ -22,27 +22,10 @@ const getIngredients = () => {
 
 const App = () => {
   const [ingredients, setIngredients] = useState([]);
-  const [error, setError] = useState({
-    hasError: false,
-    message: '',
-    errorName: null,
-    errorMessage: null,
-  });
+  
 
   useEffect(() => {
-    getIngredients()
-    .then((ingredients) => {
-      setIngredients(ingredients);
-    })
-    .catch((err) => {
-      setError({
-        ...error,
-        hasError: true,
-        message: "Could not get data",
-        errorName: err.name,
-        errorMessage: err.message,
-      });
-    });
+
   }, [])
   
   return (
@@ -56,12 +39,6 @@ const App = () => {
         </>
         }
       </main>
-      {error.hasError &&
-        <>
-          <h1>{error.message}</h1>
-          <h2>{`${error.errorName}: ${error.errorMessage}`}</h2>
-        </>
-      }
     </div>
   );
 }
