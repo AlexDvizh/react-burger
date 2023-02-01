@@ -22,7 +22,7 @@ export const getIngredients = () => {
             .catch((err) => {
                 dispatch({
                     type: GET_INGREDIENTS_ERROR,
-                    errorMessage: err.massage
+                    errorMessage: err.message
                 })
             });
     }
