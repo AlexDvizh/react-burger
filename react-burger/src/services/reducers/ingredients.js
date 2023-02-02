@@ -2,9 +2,9 @@ import {
     GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, 
     GET_INGREDIENTS_ERROR, INGREDIENTS_COUNTER_INCREASE, 
     INGREDIENTS_COUNTER_DECREASE, CHANGE_BUN 
-} from "../actions/currentIngredient";
+} from "../actions/ingredients";
 
-export const initialState = {
+const initialState = {
     ingredients: [],
     isLoading: false,
     hasError: false

@@ -1,4 +1,4 @@
-import URL from './utils';
+import { URL } from './utils';
 
 const requestApi = (url, options) => {
     return fetch(url, options).then(checkResponce);

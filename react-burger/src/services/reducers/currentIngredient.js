@@ -5,7 +5,7 @@ const initialState = {
   isOpen: false,
 };
 
-export const ingredientReducer = (state = initialState, action) => {
+const currentIngredientReducer = (state = initialState, action) => {
   switch (action.type) {
     case FILL_MODAL: {
       return {
@@ -26,3 +26,5 @@ export const ingredientReducer = (state = initialState, action) => {
     }
   }
 };
+
+export default currentIngredientReducer;

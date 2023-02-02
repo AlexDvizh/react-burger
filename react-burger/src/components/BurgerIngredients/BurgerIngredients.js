@@ -4,11 +4,14 @@ import PropTypes from "prop-types";
 import { ingredientPropTypes } from "../../utils/prop-types";
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from "./burgerIngredients.module.css";
+import { useSelector } from 'react-redux';
 
-const BurgerIngredients = (props) => {
-    const bunArr = props.burgersInfo.filter((item) => item.type === "bun");
-    const sauceArr = props.burgersInfo.filter((item) => item.type === "sauce");
-    const meatArr = props.burgersInfo.filter((item) => item.type === "main");
+const BurgerIngredients = () => {
+    const { ingredients } = useSelector(state => state.ingredients);
+    
+    const bunArr = ingredients.filter((item) => item.type === "bun");
+    const sauceArr = ingredients.filter((item) => item.type === "sauce");
+    const meatArr = ingredients.filter((item) => item.type === "main");
 
     const [current, setCurrent] = useState('one');
     
@@ -50,8 +53,8 @@ const BurgerIngredients = (props) => {
     )
 }
 
-BurgerIngredients.propTypes = {
-    burgersInfo: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
-};
+// BurgerIngredients.propTypes = {
+//     burgersInfo: PropTypes.arrayOf(ingredientPropTypes.isRequired).isRequired,
+// };
 
 export default BurgerIngredients;

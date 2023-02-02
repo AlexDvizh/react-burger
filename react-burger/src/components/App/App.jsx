@@ -1,42 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import AppHeader from '../AppHeader/AppHeader';
-import { URL } from '../../utils/utils'; 
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import AppHeader from '../AppHeader/AppHeader'; 
 import styles from "./app.module.css";
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredients } from '../../services/actions/ingredients';
 
 
-const getIngredients = () => {
-  return fetch(URL)
-    .then(res => {
-      if (res.ok) {
-          return res.json();
-      }
-      return Promise.reject(`Ошибка ${res.status}`);
-    })
-    .then((response) => {
-      if (response?.success) return response.data;
-      return Promise.reject(response);
-    });
-};
 
 const App = () => {
-  const [ingredients, setIngredients] = useState([]);
+  const { hasError } = useSelector((state) => state.ingredients)
+  const dispatch = useDispatch();
   
-
   useEffect(() => {
-
-  }, [])
+    dispatch(getIngredients())
+    
+  }, [dispatch])
   
   return (
     <div className={styles.App}>
       <AppHeader />
       <main className={styles.main}>
-        {ingredients.length !== 0 &&
-        <>
-          <BurgerIngredients burgersInfo={ingredients}/>
-          <BurgerConstructor burgersInfo={ingredients}/>
-        </>
+        {!hasError &&
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </DndProvider>
         }
       </main>
     </div>

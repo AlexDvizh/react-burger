@@ -5,11 +5,13 @@ import { ingredientPropTypes } from "../../utils/prop-types";
 import styles from "./burgerIngredient.module.css";
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../Modal/IngredientDetails';
+import { useSelector } from 'react-redux';
 
 const BurgerIngredient = (props) => {
+    const { ingredients } = useSelector(state => state.ingredients)
     const ingredientModalTitle = "Детали ингредиента";
     const [openPopup, setOpenPopup] = useState(false);
-
+    console.log("ingredient",ingredients)
     function handlePopupClose() {
         setOpenPopup(false);
     }
@@ -21,7 +23,7 @@ const BurgerIngredient = (props) => {
     return (
         <>
             <div className={`${styles.burgerItem} mr-10`} onClick={handlePopupOpen}>
-                <Counter count={1} size="default"  />
+                <Counter count={ingredients.count} size="default"  />
                 <img className="ml-4 mr-4" src={props.ingredient.image} alt="Изображение булки бургера"/>
                 <div className={styles.burgerPrice}>
                     <p className='text text_type_digits-default mr-2'>{props.ingredient.price}</p>
