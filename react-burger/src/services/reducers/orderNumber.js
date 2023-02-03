@@ -13,7 +13,10 @@ import {
   export const orderNumberReducer = (state = initialState, action) => {
     switch (action.type) {
       case GET_ORDER_ID_REQUEST: {
-        return { ...state, orderIdRequest: true };
+        return { 
+          ...state, 
+          orderIdRequest: true 
+        };
       }
       case GET_ORDER_ID_SUCCESS: {
         return {

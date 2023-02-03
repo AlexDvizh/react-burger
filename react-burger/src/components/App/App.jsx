@@ -9,14 +9,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 
 
-
 const App = () => {
-  const { hasError } = useSelector((state) => state.ingredients)
+  const { hasError } = useSelector(state => state.ingredients)
   const dispatch = useDispatch();
   
+
   useEffect(() => {
-    dispatch(getIngredients())
-    
+    dispatch(getIngredients())  
   }, [dispatch])
   
   return (
@@ -24,10 +23,10 @@ const App = () => {
       <AppHeader />
       <main className={styles.main}>
         {!hasError &&
-        <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </DndProvider>
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         }
       </main>
     </div>

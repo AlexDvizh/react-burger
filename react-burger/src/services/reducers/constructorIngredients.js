@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 
 import { ingredients } from "../../utils/prop-types";
 import { 
@@ -14,6 +14,8 @@ const initialState = {
     },
     result: 0
 }
+
+
 
 export const constructorReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -40,7 +42,7 @@ export const constructorReducer = (state = initialState, action) => {
               ...state,
               ingredients: {
                   ...state.ingredients,
-                  fillings: [...state.ingredients.fillings].concat([{...action.ingredients, uuid: uuid()}])
+                  fillings: [...state.ingredients.fillings].concat([{...action.ingredient, uuid: uuidv4() }])
               }
             }
         }

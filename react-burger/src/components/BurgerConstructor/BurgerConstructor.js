@@ -6,12 +6,11 @@ import {
 import { ADD_FILLING, ADD_BUN } from "../../services/actions/constructorIngredients";
 import PropTypes from "prop-types";
 import { ingredientPropTypes } from "../../utils/prop-types";
-import Modal from '../Modal/Modal';
-import OrderDetails from '../Modal/OrderDetails';
 import styles from "./burgerConstructor.module.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import DragAndDropContainer from './DragAndDropContainer';
+import BurgerConstructorOrder from './BurgerOrder';
 
 const BurgerConstructor = (props) => {
     const { ingredients } = useSelector(state => state.burgerConstructor);
@@ -53,20 +52,17 @@ const BurgerConstructor = (props) => {
             }
         }
     })
-    
-    // const bunElement = useMemo(() => {
-    //     return ingredients.find((element) => element.type === "bun");
-    // }, [ingredients]) 
-    // const anotherElements = ingredients.filter((element) => element.type !== "bun");
   
     return (
         <section className={styles.constructor}>
             <div className={styles.constructorWrap} ref={dropTarget}>
                 { emptyBun 
                     ?
-                    <></>
+                    <div className={`${styles.emptyConstructorItem} ${styles.bunTop}`}>
+                        Выберите булку
+                    </div>
                     :
-                    <div className={styles.itemWrap}>
+                    <div className={`${styles.itemWrap} ${styles.constructorItemBun}`}>
                         <ConstructorElement
                             type="top"
                             isLocked={true}
@@ -82,9 +78,11 @@ const BurgerConstructor = (props) => {
                 
                 { emptyBun 
                     ?
-                    <></>
+                    <div className={`${styles.emptyConstructorItem} ${styles.bunBottom}`}>
+                        Выберите булку
+                    </div>
                     :
-                    <div className={styles.itemWrap}>
+                    <div className={`${styles.itemWrap} ${styles.constructorItemBun}`}>
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}
@@ -96,6 +94,7 @@ const BurgerConstructor = (props) => {
                     </div>
                 }
             </div> 
+            <BurgerConstructorOrder emptyBun={emptyBun}/>
         </section>
     )
 }

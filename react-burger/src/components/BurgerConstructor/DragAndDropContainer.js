@@ -1,4 +1,4 @@
-import { ConstructorElement, Button, DragIcon, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag, useDrop } from "react-dnd";
@@ -12,7 +12,7 @@ import { INGREDIENTS_COUNTER_DECREASE } from "../../services/actions/ingredients
 
 
 const DragAndDropContainer = () => {
-    const { ingredients } = useSelector((store) => store.constructorBurger);
+    const { ingredients } = useSelector(state => state.burgerConstructor);
 
     return (
         <div className={styles.scrollableBox}>
@@ -22,7 +22,7 @@ const DragAndDropContainer = () => {
             }
             {ingredients.fillings.length === 0 
                 ?
-                <div className={`${styles.emptyConstructor} ${styles.fillings}`}>
+                <div className={`${styles.emptyConstructorItem} ${styles.fillings}`}>
                     Выберите начинку
                 </div>
                 :
@@ -102,19 +102,20 @@ const DragAndDropItem = ({ingredient, index}) => {
         dispatch({ type: DELETE_FILLING, uuid });
         dispatch({ type: INGREDIENTS_COUNTER_DECREASE, id });
     };
+
     return (
         <div
-        className={styles.constructor_item}
+        className={styles.itemWrap}
         ref={ref}
         data-handler-id={handlerId}
         >
-        <DragIcon type="primary" />
-        <ConstructorElement
-            text={ingredient.name}
-            price={ingredient.price}
-            thumbnail={ingredient.image}
-            handleClose={() => deleteIngredient(ingredient.nanoid, ingredient._id)}
-        />
+            <DragIcon type="primary" />
+            <ConstructorElement
+                text={ingredient.name}
+                price={ingredient.price}
+                thumbnail={ingredient.image}
+                handleClose={() => deleteIngredient(ingredient.uuid, ingredient._id)}
+            />
         </div>
     )
 }

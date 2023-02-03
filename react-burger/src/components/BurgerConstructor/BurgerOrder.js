@@ -1,37 +1,39 @@
-import { ConstructorElement, Button, DragIcon, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useRef, useState, useMemo } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useDrag, useDrop } from "react-dnd";
 import styles from "./burgerConstructor.module.css";
 
-import {
-    DELETE_FILLING,
-    MOVE_FILLING,
-} from "../../services/actions/constructorIngredients";
-import { INGREDIENTS_COUNTER_DECREASE } from "../../services/actions/ingredients";
 import Modal from '../Modal/Modal';
 import OrderDetails from '../Modal/OrderDetails';
+import { countResult } from '../../utils/utils';
+import { setOrderId } from '../../services/actions/orderNumber';
 
-const BurgerConstructorOrder = () => {
+const BurgerConstructorOrder = (props) => {
     const [popupOpen, setPopupOpen] = useState(false);
-    const { ingredients } = useSelector((store) => store.constructorBurger);
-    const memoizedTotal = useMemo(() => countTotal(ingredients), [ingredients]);
+    const { ingredients } = useSelector(state => state.burgerConstructor);
+    
     const dispatch = useDispatch();
-
-    // Сюда сохраняем старый список айди ингредиентов, чтобы сравнивать при нажатии на кнопку "Оформить заказ"
-    // Если список не изменился, то новый запрос не делается
+    const orderResult = useMemo(() => {
+        return countResult(ingredients)
+    }, [ingredients]);
+    
     const prevIngredientsId = useRef(null);
 
-    // Получаем id всех ингредиентов, находящихся в конструкторе
-    const ingredientsId = useMemo(
-        () => getIngredientsId(ingredients.bun, ingredients.fillings),
-        [ingredients.bun, ingredients.fillings]
-    );
+    const getIngredientsId = (bun, fillings) => {
+        const ingredientsId = [];
+        ingredientsId.push(bun._id);
+        fillings.forEach((el) => {
+          ingredientsId.push(el._id);
+        });
+        return ingredientsId;
+    }
+
+    const ingredientsId = useMemo(() => {
+    return getIngredientsId(ingredients.bun, ingredients.fillings)
+    }, [ingredients.bun, ingredients.fillings]);
 
     const makeOrder = () => {
-        if (!isEmptyBun && prevIngredientsId.current !== ingredientsId) {
-        // Если есть булка и список ингредиентов обновился,
-        // то делаем запрос к api, получаем orderId и записываем его в глобальное состояние store.order.orderId
+        if (!props.emptyBun && prevIngredientsId.current !== ingredientsId) {
         dispatch(setOrderId(ingredientsId));
         }
         prevIngredientsId.current = ingredientsId;
@@ -47,16 +49,25 @@ const BurgerConstructorOrder = () => {
 
     return (
         <>
-          <div className={styles.info}>
-                <p className="text text_type_digits-medium mr-2">100500</p>
+            <div className={styles.info}>
+                <p className="text text_type_digits-medium mr-2">
+                    {orderResult}
+                </p>
                 <div className={styles.image}>
                     <CurrencyIcon type="primary"/>
                 </div>
-                <div onClick={handlePopupOpen}>
-                    <Button htmlType="button" type="primary" size="large">
-                        Оформить заказ
-                    </Button>
-                </div>
+                <Button 
+                    htmlType="button" 
+                    type="primary" 
+                    size="large"
+                    disabled={props.emptyBun ? true : false}
+                    onClick={() => {
+                        makeOrder();
+                        handlePopupOpen();
+                    }}
+                >
+                    Оформить заказ
+                </Button>
             </div>
             {popupOpen &&
                 <Modal
