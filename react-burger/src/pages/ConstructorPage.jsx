@@ -3,9 +3,8 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 import styles from "./pages.module.css";
-
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
+import BurgerIngredients from "../components/BurgerIngredients/BurgerIngredients";
+import BurgerConstructor from "../components/BurgerConstructor/BurgerConstructor";
 
 const ConstructorPage = () => {
     const { hasError } = useSelector(state => state.ingredients)

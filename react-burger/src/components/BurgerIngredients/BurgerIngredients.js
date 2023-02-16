@@ -5,6 +5,7 @@ import { ingredientPropTypes } from "../../utils/prop-types";
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from "./burgerIngredients.module.css";
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const BurgerIngredients = () => {
     const { ingredients } = useSelector(state => state.ingredients);
@@ -82,9 +83,9 @@ const BurgerIngredients = () => {
             <div className={`${styles.scrollableBox} mt-10`}>
                 <h2 className={`text text_type_main-medium ${styles.title}`} id="bun_tab_header">Булки</h2>
                 <div className={styles.burgerIngredientList} id="bun_tab">
-                    {bunArr.map((bun) => {
-                       return <BurgerIngredient ingredient={bun} key={bun._id}/>
-                    })}
+                    {bunArr.map((bun) => (
+                        <BurgerIngredient ingredient={bun} key={bun._id}/>
+                    ))}
                 </div>
                 <h2 className={`text text_type_main-medium ${styles.title}`} id="sauce_tab_header">Соусы</h2>
                 <div className={styles.burgerIngredientList} id="sauce_tab">

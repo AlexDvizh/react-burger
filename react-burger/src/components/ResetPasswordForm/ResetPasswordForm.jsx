@@ -1,40 +1,24 @@
 import { Button, PasswordInput, Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDispatch } from "react-redux";
+import styles from "../../pages/pages.module.css";
   
 const ResetPasswordForm = (props) => {
-    const onChange = (event) => {
-      props.setForm((currentState) => {
-        const newState = {
-          ...currentState,
-          [event.target.name]: event.target.value,
-        };
-        return newState;
-      });
-    };
+  const dispatch = useDispatch();
+  const submitForm = (event) => {
+    event.preventDefault();
+    // dispatch(register(form));
+  };
 
     return (
       <form method="POST" action="/login">
         <h1 className="text text_type_main-medium">Восстановление пароля</h1>
         <div className="mt-6">
-          <PasswordInput
-            onChange={onChange}
-            value={props.form.password}
-            name={"password"}
-            placeholder={"Введите новый пароль"}
-          />
+          <InputPassword form={props.form} setForm={props.setForm} />
         </div>
         <div className="mt-6">
-          <Input
-            type={"text"}
-            placeholder={"Введите код из письма"}
-            onChange={onChange}
-            value={props.form.code}
-            name={"code"}
-            error={false}
-            errorText={"Ошибка"}
-            size={"default"}
-          />
+          <InputCode form={props.form} setForm={props.setForm} />
         </div>
-        <div className="mt-6">
+        <div className={`mt-6 ${styles.button}`}>
           <Button htmlType="button" type="primary" size="large">
             Сохранить
           </Button>
@@ -48,5 +32,51 @@ const ResetPasswordForm = (props) => {
       </form>
     );
 };
+
+const InputPassword = (props) => {
+  const onChange = (event) => {
+    props.setForm((currentState) => {
+      const newState = {
+        ...currentState,
+        password: event.target.value,
+      };
+      return newState;
+    });
+  };
+
+  return (
+    <PasswordInput
+      onChange={onChange}
+      value={props.form.password}
+      name={"password"}
+      placeholder={"Введите новый пароль"}
+    />
+  );
+}
+
+const InputCode = (props) => {
+  const onChange = (event) => {
+    props.setForm((currentState) => {
+      const newState = {
+        ...currentState,
+        code: event.target.value,
+      };
+      return newState;
+    });
+  };
+
+  return (
+    <Input
+      type={"text"}
+      placeholder={"Введите код из письма"}
+      onChange={onChange}
+      value={props.form.code}
+      name={"code"}
+      error={false}
+      errorText={"Ошибка"}
+      size={"default"}
+    />
+  );
+}
 
 export default ResetPasswordForm;

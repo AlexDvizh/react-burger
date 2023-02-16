@@ -1,12 +1,19 @@
-import { ProfileNavigation } from "../components/profile/profile-navigation";
-import { ProfileInfo } from "../components/profile/profile-info";
+import { useState } from "react";
+import Profile from "../components/Profile/Profile";
+import ProfileNavigation from "../components/Profile/ProfileNavigation";
 import styles from "./pages.module.css";
 
 const ProfilePage = () => {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "*******",
+  });
+
   return (
     <div className={styles.mainProfile}>
       <ProfileNavigation />
-      <ProfileInfo />
+      <Profile form={form} setForm={setForm}/>
     </div>
   );
 }

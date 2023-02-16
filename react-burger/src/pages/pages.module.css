@@ -10,4 +10,29 @@
     max-width: 80%;
     display: flex;
     justify-content: center;
+    margin-top: 7%;
+}
+
+.main {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.link,
+.link:link,
+.link:active {
+    color: #4c4cff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.text {
+    text-align: center;
 }
