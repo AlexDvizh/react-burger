@@ -1,13 +1,15 @@
 import {} from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from "./modal.module.css";
 import done from "../../images/done.svg";
+import { useSelector } from 'react-redux';
 
 const OrderDetails = () => {
+    const { orderId } = useSelector(state => state.order)
 
     return (
         <div className={styles.contentWrap}>
             <p className={`text text_type_digits-large ${styles.orderId}`}>
-                0345345
+                {orderId}
             </p>
             <p  className={`text text_type_main-medium mt-8 ${styles.orderText}`}>
                 Идентификатор заказа
