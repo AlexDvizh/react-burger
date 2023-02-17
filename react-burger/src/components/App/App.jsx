@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from '../AppHeader/AppHeader'; 
 import styles from "./app.module.css";
 
@@ -12,43 +12,53 @@ import ForgotPasswordPage from '../../pages/ForgotPasswordPage';
 import ResetPasswordPage from '../../pages/ResetPasswordPage';
 import ProfilePage from '../../pages/ProfilePage';
 
-import { getCookie } from "../../utils/cookie";
-import { setUser } from '../../services/actions/user';
 import ProtectedRoute from '../Protected-route';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../Modal/IngredientDetails';
 import { INGREDIENT_MODAL_TITLE } from '../../utils/utils';
+import { getUser } from '../../services/actions/authentication';
 
 
 const App = () => {
   const location = useLocation();
   const background = location.state && location.state.background;
   const dispatch = useDispatch();
-  const accessToken = getCookie("accessToken");
-  const refreshToken = window.localStorage.getItem("refreshToken");
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(getIngredients())  
+    dispatch(getIngredients())
+    dispatch(getUser());  
   }, [dispatch])
 
-  if (accessToken || (!accessToken && refreshToken)) {
-    dispatch(setUser(accessToken, refreshToken));
-  }
+  const handleModalClose = () => {
+    navigate(-1);
+  };
 
   return (
     <div className={styles.App}>
       <AppHeader />
-        <Routes>
-          <Route path="/" element={<ProtectedRoute element={<ConstructorPage />} />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ProtectedRoute element={<ForgotPasswordPage />} />} />
-          <Route path="/reset-password" element={<ProtectedRoute element={<ResetPasswordPage />} />} />
-          <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
-          { background &&
-            <Route path='/ingredients/:id' element={<Modal element={<IngredientDetails />} />} />
-          }
-        </Routes>
+      <Routes location={background || location}>
+        <Route path="/" element={<ConstructorPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
+        <Route path="/ingredients/:id" element={<IngredientDetails />} />
+      </Routes>
+      { background &&
+      <Routes>
+        <Route path='/ingredients/:id' element={
+          <Modal 
+            title={INGREDIENT_MODAL_TITLE} 
+            handleModalClose={handleModalClose} 
+          >
+            <IngredientDetails />
+          </Modal>
+          } 
+        />
+      </Routes>
+      }
     </div>
   );
 }

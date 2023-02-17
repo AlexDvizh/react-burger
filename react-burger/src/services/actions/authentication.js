@@ -1,5 +1,5 @@
 import {
-    registerRequest, loginRequest, logoutRequest,
+    registerRequest, loginRequest, logoutRequest, getUserRequest,
 } from "../../utils/api";
 import { setCookie, deleteCookie } from "../../utils/cookie";
   
@@ -14,6 +14,10 @@ export const AUTH_LOGIN_ERROR = "AUTH/LOGIN_FAILED";
 export const AUTH_LOGOUT_REQUEST = "AUTH/LOGOUT_REQUEST";
 export const AUTH_LOGOUT_SUCCESS = "AUTH/LOGOUT_SUCCESS";
 export const AUTH_LOGOUT_ERROR= "AUTH/LOGOUT_FAILED";
+
+export const AUTH_GET_USER_REQUEST = "AUTH/GET_USER_REQUEST";
+export const AUTH_GET_USER_SUCCESS = "AUTH/GET_USER_SUCCESS";
+export const AUTH_GET_USER_ERROR = "AUTH/GET_USER_FAILED";
 
   
 export function register(form) {
@@ -68,4 +72,24 @@ export function logout(token) {
           dispatch({ type: AUTH_LOGOUT_ERROR });
         });
     };
+}
+
+export function getUser() {
+  return function (dispatch) {
+    dispatch({
+      type: AUTH_GET_USER_REQUEST,
+    });
+    getUserRequest()
+      .then((res) => {
+        dispatch({
+          type: AUTH_GET_USER_SUCCESS,
+          ...res,
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: AUTH_GET_USER_ERROR,
+        });
+      });
+  };
 }

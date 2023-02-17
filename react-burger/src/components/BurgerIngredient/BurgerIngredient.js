@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { FILL_MODAL, CLEAR_MODAL } from '../../services/actions/currentIngredient';
 import { INGREDIENT_MODAL_TITLE } from '../../utils/utils';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const BurgerIngredient = ({ingredient}) => {
     const location = useLocation();
@@ -29,41 +29,34 @@ const BurgerIngredient = ({ingredient}) => {
       item: { ingredient },
     });
     
-    function handlePopupClose() {
-        setOpenPopup(false);
-        dispatch({ type: CLEAR_MODAL });
-    }
+    // function handlePopupClose() {
+    //     setOpenPopup(false);
+    //     dispatch({ type: CLEAR_MODAL });
+    // }
 
-    function handlePopupOpen() {
-        setOpenPopup(true);
-        dispatch({ type: FILL_MODAL, ingredient });
-    }
+    // function handlePopupOpen() {
+    //     setOpenPopup(true);
+    //     dispatch({ type: FILL_MODAL, ingredient });
+    // }
     
     return (
         <>
-            <div className={`${styles.burgerItem} mr-10`} onClick={handlePopupOpen} ref={dragRef}>
+            <div className={`${styles.burgerItem} mr-10`} ref={dragRef}>
                 {item[0].count > 0 && (
                     <Counter count={item[0].count} size="default" extraClass="m-1" />
                 )}
-                <img className="ml-4 mr-4" src={ingredient.image} alt="Изображение булки бургера" />
+                <Link
+                    to={`/ingredients/${ingredient._id}`}
+                    state={{ background: location }}
+                >
+                    <img className="ml-4 mr-4" src={ingredient.image} alt="Изображение булки бургера" />
+                </Link>
                 <div className={styles.burgerPrice}>
                     <p className='text text_type_digits-default mr-2'>{ingredient.price}</p>
                     <CurrencyIcon type="primary" />
                 </div>
                 <p className='text text_type_main-default'>{ingredient.name}</p>
             </div>
-            {
-            openPopup 
-                ?
-                    <Modal  
-                        closePopup={handlePopupClose}
-                        title={INGREDIENT_MODAL_TITLE}
-                    >
-                        <IngredientDetails ingredient={ingredient}/>
-                    </Modal>
-                :
-                    null
-            }
         </>
     )
 }

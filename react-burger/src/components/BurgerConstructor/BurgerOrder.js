@@ -69,13 +69,13 @@ const BurgerConstructorOrder = (props) => {
                     Оформить заказ
                 </Button>
             </div>
-            {popupOpen &&
+            {popupOpen && (
                 <Modal
-                    closePopup={handlePopupClose}
+                    handleModalClose={handlePopupClose}
                 >
                     <OrderDetails />
                 </Modal>
-            }
+            )}
         </>
     )
 }

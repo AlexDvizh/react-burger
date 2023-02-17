@@ -7,7 +7,6 @@ const AppHeader = () => {
     const user = useSelector((state) => state.user.user);
     const pathname = window.location.pathname;
     const userName = user.username ? user.username : "Личный кабинет";
-    const splitLocation = pathname.split("/");
 
     const isConstructor = !!useMatch({ path: '/', exact: true });
     const isHistory = !!useMatch('/history');

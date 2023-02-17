@@ -5,7 +5,6 @@ import { ingredientPropTypes } from "../../utils/prop-types";
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from "./burgerIngredients.module.css";
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const BurgerIngredients = () => {
     const { ingredients } = useSelector(state => state.ingredients);

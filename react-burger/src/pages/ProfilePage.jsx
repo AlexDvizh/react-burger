@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Profile from "../components/Profile/Profile";
 import ProfileNavigation from "../components/Profile/ProfileNavigation";
 import styles from "./pages.module.css";
@@ -8,6 +10,14 @@ const ProfilePage = () => {
     name: "",
     email: "",
     password: "*******",
+  });
+  const { isLoggedIn } = useSelector((store) => store.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
   });
 
   return (
