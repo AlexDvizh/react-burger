@@ -39,11 +39,23 @@ const App = () => {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<ConstructorPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={
+          <ProtectedRoute onlyUnAuth={true}>
+            <LoginPage />
+          </ProtectedRoute>
+        }/>
+        <Route path="/register" element={
+          <ProtectedRoute onlyUnAuth={true}>
+            <RegisterPage />
+          </ProtectedRoute>
+        } />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/profile" element={<ProtectedRoute element={<ProfilePage />} />} />
+        <Route path="/profile" element={
+          <ProtectedRoute onlyUnAuth={false}>
+            <ProfilePage />
+          </ProtectedRoute>
+        } />
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
       </Routes>
       { background &&

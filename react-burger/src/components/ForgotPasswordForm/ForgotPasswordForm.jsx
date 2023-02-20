@@ -1,17 +1,24 @@
 import { Button, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styles from "../../pages/pages.module.css";
-import { register } from "../../services/actions/authentication";
+import { resetPasswordRequest } from "../../utils/api";
   
 const ForgotPasswordForm = (props) => {
-    const dispatch = useDispatch();
-    const submitForm = (event) => {
+    const navigate = useNavigate();
+
+    const submitForm = async (event) => {
       event.preventDefault();
-      // dispatch(register(props.email));
+      await resetPasswordRequest(props.email)
+      .then((res) => {
+        if (res.success)
+          return navigate("/reset-password", { state: { resetPassword: true } });
+        if (!res.success) return Promise.reject(res);
+      })
+      .catch((err) => Promise.reject(err));
     };
 
     return (
-      <form method="POST" action="/login">
+      <form onSubmit={submitForm}>
         <h1 className="text text_type_main-medium">
           Восстановление пароля
         </h1>
@@ -19,7 +26,7 @@ const ForgotPasswordForm = (props) => {
           <InputEmail email={props.email} setEmail={props.setEmail} />
         </div>
         <div className={`mt-6 ${styles.button}`}>
-          <Button htmlType="button" type="primary" size="large" onClick={submitForm}>
+          <Button htmlType="button" type="primary" size="large">
             Восстановить
           </Button>
         </div>

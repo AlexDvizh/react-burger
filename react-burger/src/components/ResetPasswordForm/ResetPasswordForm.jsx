@@ -1,16 +1,29 @@
 import { Button, PasswordInput, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../../pages/pages.module.css";
+import { resetPasswordConfirm } from "../../utils/api";
   
 const ResetPasswordForm = (props) => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  useEffect(() => {
+    !location?.state?.resetPassword && navigate("/forgot-password")
+  }, [location.state, navigate])
+
   const submitForm = (event) => {
     event.preventDefault();
-    // dispatch(register(form));
+    resetPasswordConfirm(props.form)
+    .then((res) => {
+      if (res.success) return navigate("/login");
+      if (!res.success) return Promise.reject(res);
+    })
+    .catch((err) => Promise.reject(err));
   };
 
     return (
-      <form method="POST" action="/login">
+      <form onSubmit={submitForm}>
         <h1 className="text text_type_main-medium">Восстановление пароля</h1>
         <div className="mt-6">
           <InputPassword form={props.form} setForm={props.setForm} />

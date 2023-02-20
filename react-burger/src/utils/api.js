@@ -75,3 +75,25 @@ export const updateUserRequest = async (form) => {
         body: JSON.stringify({ name: name, email: email }),
     });
 };
+
+export const resetPasswordRequest = async (email) => {
+    return await requestApi(`${URL}/password-reset`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+  };
+  
+export const resetPasswordConfirm = async (form) => {
+    const { password, token } = form;
+    return await requestApi(`${URL}/password-reset/reset`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ password, token }),
+    });
+  };
+  

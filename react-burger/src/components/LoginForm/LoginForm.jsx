@@ -12,7 +12,7 @@ const LoginForm = (props) => {
     };
 
     return (
-      <form method="POST" action="/">
+      <form onSubmit={submitForm}>
         <h1 className="text text_type_main-medium">Вход</h1>
         <div className="mt-6">
           <InputEmail form={props.form} setForm={props.setForm} />
@@ -21,7 +21,7 @@ const LoginForm = (props) => {
           <InputPassword form={props.form} setForm={props.setForm} />
         </div>
         <div className={`mt-6 ${styles.button}`}>
-          <Button htmlType="button" type="primary" size="large" onClick={submitForm}>
+          <Button htmlType="button" type="primary" size="large">
             Войти
           </Button>
         </div>
