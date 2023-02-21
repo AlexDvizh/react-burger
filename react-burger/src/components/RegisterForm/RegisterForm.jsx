@@ -5,6 +5,7 @@ import {
 import { useDispatch } from "react-redux";
 import { register } from "../../services/actions/authentication";
 import styles from "../../pages/pages.module.css";
+import { NavLink } from "react-router-dom";
 
 const RegisterForm = (props) => {
   const dispatch = useDispatch();
@@ -36,9 +37,9 @@ const RegisterForm = (props) => {
       </div>
       <p className="mt-20 text text_type_main-default text_color_inactive">
         Уже зарегистрированы?{" "}
-        <a className={styles.link} href="/login">
+        <NavLink className={styles.link} to="/login">
           Войти
-        </a>
+        </NavLink>
       </p>
     </form>
   );

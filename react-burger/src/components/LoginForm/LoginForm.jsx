@@ -1,7 +1,8 @@
 import { Button, PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../../services/actions/authentication";
 import styles from "../../pages/pages.module.css";
+import { NavLink } from "react-router-dom";
   
 const LoginForm = (props) => {
     const dispatch = useDispatch();
@@ -21,21 +22,21 @@ const LoginForm = (props) => {
           <InputPassword form={props.form} setForm={props.setForm} />
         </div>
         <div className={`mt-6 ${styles.button}`}>
-          <Button htmlType="button" type="primary" size="large">
+          <Button htmlType="submit" type="primary" size="large">
             Войти
           </Button>
         </div>
         <p className={`mt-20 text text_type_main-default text_color_inactive ${styles.text}`}>
           Вы новый пользователь?{" "}
-          <a className={styles.link} href="/register">
+          <NavLink className={styles.link} to="/register">
             Зарегистрироваться
-          </a>
+          </NavLink>
         </p>
         <p className={`mt-4 text text_type_main-default text_color_inactive ${styles.text}`}>
           Забыли пароль?{" "}
-          <a className={styles.link} href="/forgot-password">
+          <NavLink className={styles.link} to="/forgot-password">
             Восстановите пароль
-          </a>
+          </NavLink>
         </p>
       </form>
     );

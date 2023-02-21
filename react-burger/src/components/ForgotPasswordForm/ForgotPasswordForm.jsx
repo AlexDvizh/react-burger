@@ -1,5 +1,5 @@
 import { Button, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "../../pages/pages.module.css";
 import { resetPasswordRequest } from "../../utils/api";
   
@@ -32,9 +32,9 @@ const ForgotPasswordForm = (props) => {
         </div>
         <p className="mt-20 text text_type_main-default text_color_inactive">
           Вспомнили пароль?{" "}
-          <a className={styles.link} href="/login">
+          <NavLink className={styles.link} to="/login">
             Войти
-          </a>
+          </NavLink>
         </p>
       </form>
     );
