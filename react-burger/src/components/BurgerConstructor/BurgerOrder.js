@@ -7,10 +7,14 @@ import Modal from '../Modal/Modal';
 import OrderDetails from '../Modal/OrderDetails';
 import { countResult } from '../../utils/utils';
 import { setOrderId } from '../../services/actions/orderNumber';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const BurgerConstructorOrder = (props) => {
     const [popupOpen, setPopupOpen] = useState(false);
     const { ingredients } = useSelector(state => state.burgerConstructor);
+    const { isLoggedIn } = useSelector(state => state.auth);
+    const navigate = useNavigate();
+    const location = useLocation();
     
     const dispatch = useDispatch();
     const orderResult = useMemo(() => {
@@ -33,8 +37,10 @@ const BurgerConstructorOrder = (props) => {
     }, [ingredients.bun, ingredients.fillings]);
 
     const makeOrder = () => {
-        if (!props.emptyBun && prevIngredientsId.current !== ingredientsId) {
+        if (!props.emptyBun && prevIngredientsId.current !== ingredientsId && isLoggedIn) {
         dispatch(setOrderId(ingredientsId));
+        } else if (!isLoggedIn) {
+            navigate("/login", { state: { from: location } });
         }
         prevIngredientsId.current = ingredientsId;
     };
@@ -69,13 +75,13 @@ const BurgerConstructorOrder = (props) => {
                     Оформить заказ
                 </Button>
             </div>
-            {popupOpen &&
+            {popupOpen && (
                 <Modal
-                    closePopup={handlePopupClose}
+                    handleModalClose={handlePopupClose}
                 >
                     <OrderDetails />
                 </Modal>
-            }
+            )}
         </>
     )
 }

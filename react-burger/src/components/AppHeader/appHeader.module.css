@@ -28,3 +28,18 @@
 .logo {
     flex-grow: 0.3;
 }
+
+.navLink {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navLinkActive {
+    color: #ffffff;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    text-decoration: none;
+}

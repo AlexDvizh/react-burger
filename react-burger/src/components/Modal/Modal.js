@@ -12,7 +12,7 @@ const Modal = (props) => {
     useEffect(() => {
         function handleKeyDown(event) {
             if(event.code === "Escape") {
-                props.closePopup();
+                props.handleModalClose();
             }
         }
         document.body.addEventListener("keydown", handleKeyDown);
@@ -24,7 +24,7 @@ const Modal = (props) => {
     
     return ReactDOM.createPortal(
         <>
-            <ModalOverlay onClose={props.closePopup}/>
+            <ModalOverlay onClose={props.handleModalClose}/>
             <div className={styles.modal}>
                 <div className={styles.modalWrap}>
                     <div className={styles.modalHeader}>
@@ -33,7 +33,7 @@ const Modal = (props) => {
                             :
                             <p className={styles.noTitle}></p>
                         }
-                        <div onClick={props.closePopup}>
+                        <div onClick={props.handleModalClose}>
                             <CloseIcon />
                         </div>
                     </div>
@@ -47,10 +47,10 @@ const Modal = (props) => {
     )
 }
 
-Modal.propTypes = {
-    closePopup: PropTypes.func.isRequired,
-    title: PropTypes.string,
-    children: PropTypes.element.isRequired,
-};
+// Modal.propTypes = {
+//     closePopup: PropTypes.func.isRequired,
+//     title: PropTypes.string,
+//     children: PropTypes.element.isRequired,
+// };
 
 export default Modal;

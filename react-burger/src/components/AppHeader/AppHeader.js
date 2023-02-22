@@ -1,19 +1,43 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from "./appHeader.module.css";
+import { useSelector } from "react-redux";
+import { NavLink, useMatch } from 'react-router-dom';
 
 const AppHeader = () => {
+    const user = useSelector((state) => state.user.user);
+    const pathname = window.location.pathname;
+    const userName = user.username ? user.username : "Личный кабинет";
+
+    const isConstructor = !!useMatch({ path: '/', exact: true });
+    const isHistory = !!useMatch('/history');
+    const isProfile = !!useMatch('/profile');
     
     return (
         <header className={styles.header}>
             <div className={styles.headerWrap}>
                 <div className={styles.navigationList}>
                     <div className={`p-4 ${styles.navigationItem}`}>
-                        <BurgerIcon type="primary" className=""/>
-                        <p className="text text_type_main-small pl-2">Конструктор</p>
+                        <NavLink
+                            exact="true"
+                            to='/'
+                            className={({ isActive }) =>
+                                isActive ? styles.navLinkActive : styles.navLink
+                            }
+                        >
+                            <BurgerIcon type={isConstructor ? 'primary' : 'secondary'}/>
+                            <p className="text text_type_main-small pl-2">Конструктор</p>
+                        </NavLink>
                     </div>
                     <div className={`p-4 ${styles.navigationItem}`}>
-                        <ListIcon type="secondary"/>
-                        <p className="text text_type_main-small text_color_inactive pl-2">Лента заказов</p>
+                        <NavLink
+                            to='/history'
+                            className={({ isActive }) =>
+                                isActive ? styles.navLinkActive : styles.navLink
+                            }
+                        >
+                            <ListIcon type={isHistory ? 'primary' : 'secondary'}/>
+                            <p className="text text_type_main-small pl-2">Лента заказов</p>
+                        </NavLink>
                     </div>
                     
                 </div>
@@ -21,8 +45,15 @@ const AppHeader = () => {
                     <Logo />
                 </div>
                 <div className={`p-4 ${styles.navigationItem}`}>
-                    <ProfileIcon type="secondary" />
-                    <p className="text text_type_main-small text_color_inactive pl-2">Личный кабинет</p>
+                    <NavLink
+                        to='/profile'
+                        className={({ isActive }) =>
+                            isActive ? styles.navLinkActive : styles.navLink
+                        }
+                    >
+                        <ProfileIcon type={isProfile ? 'primary' : 'secondary'} />
+                        <p className="text text_type_main-small pl-2">{userName}</p>
+                    </NavLink>
                 </div>
             </div>
         </header>
