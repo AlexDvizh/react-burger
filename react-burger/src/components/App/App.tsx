@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, FC } from 'react';
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from '../AppHeader/AppHeader'; 
 import styles from "./app.module.css";
@@ -19,15 +19,15 @@ import { INGREDIENT_MODAL_TITLE } from '../../utils/utils';
 import { getUser } from '../../services/actions/authentication';
 
 
-const App = () => {
+const App: FC = () => {
   const location = useLocation();
   const background = location.state && location.state.background;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getIngredients())
-    dispatch(getUser());  
+    dispatch(getIngredients() as any)
+    dispatch(getUser() as any);  
   }, [dispatch])
 
   const handleModalClose = () => {

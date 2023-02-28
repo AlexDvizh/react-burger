@@ -1,11 +1,12 @@
-import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { FC } from 'react';
 import styles from "./appHeader.module.css";
 import { useSelector } from "react-redux";
 import { NavLink, useMatch } from 'react-router-dom';
 
-const AppHeader = () => {
+
+const AppHeader: FC = () => {
     const user = useSelector((state) => state.user.user);
-    const pathname = window.location.pathname;
     const userName = user.username ? user.username : "Личный кабинет";
 
     const isConstructor = !!useMatch({ path: '/', exact: true });
