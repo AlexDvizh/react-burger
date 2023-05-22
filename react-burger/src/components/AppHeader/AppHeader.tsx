@@ -1,15 +1,16 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { FC } from 'react';
 import styles from "./appHeader.module.css";
-import { useSelector } from "react-redux";
 import { NavLink, useMatch } from 'react-router-dom';
+import { useAppSelector } from '../../services/types';
+import { RootState } from '../../services/reducers';
 
 
 const AppHeader: FC = () => {
-    const user = useSelector((state) => state.user.user);
+    const user = useAppSelector((state: RootState) => state.user.user);
     const userName = user.username ? user.username : "Личный кабинет";
 
-    const isConstructor = !!useMatch({ path: '/', exact: true });
+    const isConstructor = !!useMatch({ path: '/' });
     const isHistory = !!useMatch('/history');
     const isProfile = !!useMatch('/profile');
     
@@ -19,7 +20,6 @@ const AppHeader: FC = () => {
                 <div className={styles.navigationList}>
                     <div className={`p-4 ${styles.navigationItem}`}>
                         <NavLink
-                            exact="true"
                             to='/'
                             className={({ isActive }) =>
                                 isActive ? styles.navLinkActive : styles.navLink

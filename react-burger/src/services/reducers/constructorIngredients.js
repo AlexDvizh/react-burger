@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { ingredients } from "../../utils/prop-types";
 import { 
     ADD_BUN, DELETE_BUN,
     ADD_FILLING, DELETE_FILLING,
