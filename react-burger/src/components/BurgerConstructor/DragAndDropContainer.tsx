@@ -11,12 +11,12 @@ import {
 import { INGREDIENTS_COUNTER_DECREASE } from "../../services/actions/ingredients";
 import { useAppSelector } from '../../services/types';
 import { RootState } from '../../services/reducers';
-import { TIngredientWithUniqueId, TIngredientsWithUniqueId } from '../../utils/types/ingredients-types';
+import { TIngredient, TIngredientWithUniqueId, TIngredientsWithUniqueId } from '../../utils/types/ingredients-types';
 import type { Identifier, XYCoord } from "dnd-core";
 
 
 type DragAndDrop = {
-    ingredient: any,
+    ingredient: TIngredient,
     index: number,
     type: string
 } 

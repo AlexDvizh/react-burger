@@ -1,5 +1,5 @@
 import { EmailInput, PasswordInput, Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../../services/actions/user";
 import styles from "./profile.module.css";
@@ -16,12 +16,8 @@ function Profile(): JSX.Element {
   const { form, handleChange, setForm } = useForm({
     name: user.username,
     email: user.email,
-    password: "12345678",
+    password: "",
   });
-
-  // useEffect(() => {
-  //   setForm({ ...form, name: user.username, email: user.email });
-  // }, [user, setForm]);
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.name === "password") {
@@ -54,11 +50,6 @@ function Profile(): JSX.Element {
     setPasswordChanged(false);
   };
 
-  // const submitForm = (event) => {
-  //   event.preventDefault();
-  //   dispatch(updateUser(form));
-  // };
-
   const [inputIsActive, setInputIsActive] = useState(false);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -79,7 +70,7 @@ function Profile(): JSX.Element {
             onChange={onChange}
             onIconClick={onIconClick}
             onBlur={() => setInputIsActive(false)}
-            disabled={inputIsActive ? false : true}
+            disabled={!inputIsActive}
             ref={inputRef}
           />
         </div>

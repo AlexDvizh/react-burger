@@ -4,8 +4,9 @@ import { URL } from './utils';
 import {
     IResponse, ILogin, IRegister,
     IResetPassword, IUpdateuser, IRefreshData,
-    IOptions, IRefreshOptions,
+    IOptions, IRefreshOptions, IUser,
   } from "./types/api-types";
+import { TIngredient } from './types/ingredients-types';
 
 function requestApi<T>(url: string, options?: IOptions): Promise<T> {
     return fetch(url, options).then(checkResponce);
@@ -43,7 +44,7 @@ export const requestWithRefresh = async <T>(
 };
 
 export const getIngredientsRequest = async () => {
-    return await requestApi(`${URL}/ingredients`);
+    return await requestApi<TIngredient[]>(`${URL}/ingredients`);
   };
   
 export const postOrderRequest = async (ingredientsId: Array<string>) => {
@@ -56,7 +57,7 @@ export const postOrderRequest = async (ingredientsId: Array<string>) => {
 
 export const registerRequest = async (form: IRegister) => {
     const { email, password, name } = form;
-    return await requestApi(`${URL}/auth/register`, {
+    return await requestApi<IRegister>(`${URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, password: password, name: name }),
@@ -65,7 +66,7 @@ export const registerRequest = async (form: IRegister) => {
 
 export const loginRequest = async (form: ILogin) => {
     const { email, password } = form;
-    return await requestApi(`${URL}/auth/login`, {
+    return await requestApi<ILogin>(`${URL}/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -84,7 +85,7 @@ export const logoutRequest = async () => {
 };
 
 export const getUserRequest = async () => {
-    return await requestWithRefresh(`${URL}/auth/user`, {
+    return await requestWithRefresh<IUser>(`${URL}/auth/user`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -70,7 +70,7 @@ function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
                     htmlType="button" 
                     type="primary" 
                     size="large"
-                    disabled={emptyBun ? true : false}
+                    disabled={emptyBun}
                     onClick={() => {
                         makeOrder();
                         handlePopupOpen();
