@@ -36,3 +36,9 @@
 .text {
     text-align: center;
 }
+
+section {
+    margin: auto;
+    width: 35%;
+    text-align: start;
+}

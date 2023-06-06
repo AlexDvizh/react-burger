@@ -1,6 +1,5 @@
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useRef, useState, useMemo, FC } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState, useMemo } from "react";
 import styles from "./burgerConstructor.module.css";
 
 import Modal from '../Modal/Modal';
@@ -8,7 +7,7 @@ import OrderDetails from '../Modal/OrderDetails';
 import { countResult } from '../../utils/utils';
 import { setOrderId } from '../../services/actions/orderNumber';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../services/types';
+import { useAppSelector, useAppDispatch } from '../../services/types';
 import { RootState } from '../../services/reducers';
 import { TIngredient, TIngredientWithUniqueId } from '../../utils/types/ingredients-types';
 
@@ -19,7 +18,7 @@ function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
     const navigate = useNavigate();
     const location = useLocation();
     
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const orderResult = useMemo(() => {
         return countResult(ingredients)
     }, [ingredients]);
