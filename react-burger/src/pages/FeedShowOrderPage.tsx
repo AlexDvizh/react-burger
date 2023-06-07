@@ -1,12 +1,30 @@
-import { FeedShowOrder } from "../components/feed-show-order/feed-show-order";
-import "./feed-show-order-page.module.css";
+import { FeedShowOrder } from "../components/feedShowOrder/feedShowOrder";
+import { useAppSelector } from "../services/types/web-socket";
+import styles from "./pages.module.css";
 
-function FeedShowOrderPage(): JSX.Element {
-  return (
-    <section>
-      <FeedShowOrder />
-    </section>
+function FeedShowOrderPage({ isProfileOrder }: { isProfileOrder: boolean; }): JSX.Element {
+  const { ordersProfileLoaded } = useAppSelector((store) => store.wsProfile);
+  const { ordersFeedLoaded } = useAppSelector((store) => store.wsFeed);
+
+  const page = isProfileOrder ? (
+    <>
+      {ordersProfileLoaded && (
+        <section className={`${styles.feed_show_order_section}`}>
+          <FeedShowOrder isModal={false} isProfileOrder={isProfileOrder} />
+        </section>
+      )}
+    </>
+  ) : (
+    <>
+      {ordersFeedLoaded && (
+        <section className={`${styles.feed_show_order_section}`}>
+          <FeedShowOrder isModal={false} isProfileOrder={isProfileOrder} />
+        </section>
+      )}
+    </>
   );
+
+  return page;
 }
 
 export { FeedShowOrderPage };

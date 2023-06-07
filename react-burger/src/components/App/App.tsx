@@ -10,12 +10,18 @@ import RegisterPage from '../../pages/RegisterPage';
 import ForgotPasswordPage from '../../pages/ForgotPasswordPage';
 import ResetPasswordPage from '../../pages/ResetPasswordPage';
 import ProfilePage from '../../pages/ProfilePage';
+import ProfileSharedLayout from '../../pages/ProfileSharedLayout';
 
 import ProtectedRoute from '../Protected-route';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../Modal/IngredientDetails';
 import { INGREDIENT_MODAL_TITLE, WS_ORDERS_API, WS_PROFILE_ORDERS_API } from '../../utils/utils';
 import { getUser } from '../../services/actions/authentication';
+
+import { ProfileOrders } from "../profileOrders/profileOrders";
+import { FeedPage } from "../../pages/FeedPage";
+import { FeedShowOrderPage } from "../../pages/FeedShowOrderPage";
+import { FeedShowOrder } from "../feed-show-order/feed-show-order";
 
 import {
   connect as connectWsFeed,
@@ -27,8 +33,7 @@ import {
   disconnect as disconnectWsProfile,
 } from "../../services/actions/ws-profile";
 import { getCookie } from '../../utils/cookie';
-import { useAppSelector, useAppDispatch } from '../../services/types';
-import { FeedPage } from '../../pages/FeedPage';
+import { useAppSelector, useAppDispatch } from '../../services/types/web-socket';
 
 
 const App: FC = () => {

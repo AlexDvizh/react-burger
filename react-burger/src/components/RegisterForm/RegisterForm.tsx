@@ -2,14 +2,14 @@ import {
   Button, PasswordInput,
   EmailInput, Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
-import { register } from "../../services/actions/authentication";
 import styles from "../../pages/pages.module.css";
 import { NavLink } from "react-router-dom";
 import useForm from "../../utils/hooks/useForm";
+import { useAppDispatch } from "../../services/hooks";
+import { register } from "../../services/slices/auth";
 
 function RegisterForm(): JSX.Element {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { form, handleChange } = useForm({ email: "", password: "", name: "" });
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

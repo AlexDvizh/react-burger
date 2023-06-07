@@ -1,3 +1,3 @@
 .total {
-  composes: total from "../orders-finished-all-time/orders-finished-all-time.module.css";
+  composes: total from "../ordersFinishedAlltime/ordersFinishedAlltime.module.css";
 }

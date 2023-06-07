@@ -1,6 +1,6 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useRef, FC } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./burgerConstructor.module.css";
 
@@ -9,7 +9,7 @@ import {
     MOVE_FILLING,
 } from "../../services/actions/constructorIngredients";
 import { INGREDIENTS_COUNTER_DECREASE } from "../../services/actions/ingredients";
-import { useAppSelector } from '../../services/types';
+import { useAppSelector } from '../../services/types/web-socket';
 import { RootState } from '../../services/reducers';
 import { TIngredient, TIngredientWithUniqueId, TIngredientsWithUniqueId } from '../../utils/types/ingredients-types';
 import type { Identifier, XYCoord } from "dnd-core";

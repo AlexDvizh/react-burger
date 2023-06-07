@@ -6,18 +6,21 @@ import styles from "./pages.module.css";
 import BurgerIngredients from "../components/BurgerIngredients/BurgerIngredients";
 import BurgerConstructor from "../components/BurgerConstructor/BurgerConstructor";
 import { RootState } from "../services/reducers";
+import { useAppSelector } from "../services/types/web-socket";
 
 function ConstructorPage(): JSX.Element {
-    const { hasError } = useSelector((state: RootState) => state.ingredients)
+    const { hasError, status } = useAppSelector((state: RootState) => state.ingredients)
 
     return (
         <main className={styles.mainConstructor}>
-            {!hasError &&
-            <DndProvider backend={HTML5Backend}>
+            {typeof hasError === "string" && status === "failed" ? (
+                <h1>{hasError}</h1>
+                ) : (
+                <DndProvider backend={HTML5Backend}>
                 <BurgerIngredients />
                 <BurgerConstructor />
-            </DndProvider>
-            }
+                </DndProvider>
+            )}
       </main>
     )
 }

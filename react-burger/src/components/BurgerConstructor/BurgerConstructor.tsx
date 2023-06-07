@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import DragAndDropContainer from './DragAndDropContainer';
 import BurgerConstructorOrder from './BurgerOrder';
-import { useAppSelector } from '../../services/types';
+import { useAppSelector } from '../../services/hooks';
 import { RootState } from '../../services/reducers';
 import { TIngredient } from '../../utils/types/ingredients-types';
 

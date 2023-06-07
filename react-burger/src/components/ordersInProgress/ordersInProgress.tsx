@@ -1,16 +1,17 @@
-import styles from "./orders-in-progress.module.css";
+import styles from "./ordersInProgress.module.css";
+import { IWSOrder } from "../../services/types/web-socket";
 
-function OrdersInProgress(): JSX.Element {
+function OrdersInProgress({ pending }: { pending: Array<IWSOrder> }): JSX.Element {
+
   return (
     <div className={`${styles.status} ${styles.inProgress}`}>
       <p className="mb-6 text text_type_main-medium">В работе:</p>
       <div className={`${styles.ordersId}`}>
-        <p className="mb-2 text text_type_digits-default">034533</p>
-        <p className="mb-2 text text_type_digits-default">034533</p>
-        <p className="mb-2 text text_type_digits-default">034533</p>
-        <p className="mb-2 text text_type_digits-default">034533</p>
-        <p className="mb-2 text text_type_digits-default">034533</p>
-        <p className="mb-2 text text_type_digits-default">034533</p>
+        {pending.map((el, index) => (
+          <p className="mb-2 text text_type_digits-default" key={index}>
+            {el.number}
+          </p>
+        ))}
       </div>
     </div>
   );

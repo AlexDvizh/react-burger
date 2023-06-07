@@ -4,14 +4,15 @@ import styles from "./burgerConstructor.module.css";
 
 import Modal from '../Modal/Modal';
 import OrderDetails from '../Modal/OrderDetails';
-import { countResult } from '../../utils/utils';
 import { setOrderId } from '../../services/actions/orderNumber';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../services/types';
+import { useAppSelector, useAppDispatch } from '../../services/hooks';
 import { RootState } from '../../services/reducers';
 import { TIngredient, TIngredientWithUniqueId } from '../../utils/types/ingredients-types';
+import { countResult } from '../../utils/utils';
 
 function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
+    
     const [popupOpen, setPopupOpen] = useState(false);
     const { ingredients } = useAppSelector((state: RootState) => state.burgerConstructor);
     const { isLoggedIn } = useAppSelector((state: RootState) => state.auth);
@@ -81,6 +82,8 @@ function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
             {popupOpen && (
                 <Modal
                     handleModalClose={handlePopupClose}
+                    showId={false}
+                    isProfileOrder={false}
                 >
                     <OrderDetails />
                 </Modal>

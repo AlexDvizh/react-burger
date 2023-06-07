@@ -1,14 +1,21 @@
 import styles from "./pages.module.css";
 
-import { FeedOrders } from "../components/feed-orders/feed-orders";
-import { FeedStatus } from "../components/feed-status/feed-status";
+import { FeedOrders } from "../components/feedOrders/feedOrders";
+import { FeedStatus } from "../components/feedStatus/feedStatus";
+import { useAppSelector } from "../services/types/web-socket";
 
 function FeedPage(): JSX.Element {
+  const { ordersFeedLoaded } = useAppSelector((store) => store.wsFeed);
+
   return (
-    <main className={`${styles.mainConstructor}`}>
-      <FeedOrders />
-      <FeedStatus />
-    </main>
+    <>
+      {ordersFeedLoaded && (
+        <main className={`${styles.mainConstructor}`}>
+          <FeedOrders />
+          <FeedStatus />
+        </main>
+      )}
+    </>
   );
 }
 

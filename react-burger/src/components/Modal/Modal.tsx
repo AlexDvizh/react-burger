@@ -3,18 +3,30 @@ import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styles from "./modal.module.css";
 import ModalOverlay from './ModalOverlay';
+import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../../services/hooks';
 
 const modalRoot = document.getElementById('modals');
 
 function Modal({
     handleModalClose,
     title,
+    showId = false,
+    isProfileOrder,
     children,
-  }: {
+    }: {
     handleModalClose: () => void;
     title?: string;
+    showId: boolean;
+    isProfileOrder: boolean;
     children: React.ReactNode;
-  }): JSX.Element  {
+    }): JSX.Element {
+    const orderNumber = useAppSelector(
+        !isProfileOrder
+            ? (store) => store.wsFeed.orders.find((el) => el._id === id)
+            : (store) => store.wsProfile.orders.find((el) => el._id === id)
+        )?.number;
+    const { id } = useParams();
     
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent | React.KeyboardEvent) {
@@ -40,9 +52,16 @@ function Modal({
                             :
                             <p className={styles.noTitle}></p>
                         }
-                        <div onClick={handleModalClose}>
-                            <CloseIcon type="primary"/>
-                        </div>
+                        {showId && (
+                            <h1 className="text text_type_digits-default">#{orderNumber}</h1>
+                        )}
+                        <p
+                            onClick={handleModalClose}
+                            id="close-btn"
+                            className={styles.close_btn}
+                        >
+                            <CloseIcon type="primary" />
+                        </p>
                     </div>
                     <div className={styles.contentWrap}>
                         {children}

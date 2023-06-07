@@ -1,9 +1,9 @@
-import { useDispatch } from "react-redux";
 import styles from "./profile.module.css";
 import { NavLink } from "react-router-dom";
+import { useAppDispatch } from "../../services/hooks";
 
 function ProfileLink({ name }: { name: string }): JSX.Element | null {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleLogout = () => {
     //@ts-ignore
     dispatch(logout());

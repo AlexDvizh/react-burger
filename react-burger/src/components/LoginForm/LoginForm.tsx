@@ -1,12 +1,12 @@
 import { Button, PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
 import { login } from "../../services/actions/authentication";
 import styles from "../../pages/pages.module.css";
 import { NavLink } from "react-router-dom";
 import useForm from "../../utils/hooks/useForm";
+import { useAppDispatch } from "../../services/hooks";
   
 const LoginForm = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const { form, handleChange } = useForm({ email: "", password: "" });
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,46 +57,5 @@ const LoginForm = () => {
       </form>
     );
 }
-
-// const InputEmail = (props) => {
-//   const onChange = (event) => {
-//     props.setForm((currentState) => {
-//       const newState = {
-//         ...currentState,
-//         email: event.target.value,
-//       };
-//       return newState;
-//     });
-//   };
-
-//   return (
-//     <EmailInput
-//       onChange={onChange}
-//       value={props.form.email}
-//       name={"email"}
-//       isIcon={false}
-//     />
-//   );
-// }
-
-// const InputPassword = (props) => {
-//   const onChange = (event) => {
-//     props.setForm((currentState) => {
-//       const newState = {
-//         ...currentState,
-//         password: event.target.value,
-//       };
-//       return newState;
-//     });
-//   };
-
-//   return (
-//     <PasswordInput
-//       onChange={onChange}
-//       value={props.form.password}
-//       name={"password"}
-//     />
-//   );
-// }
 
 export default LoginForm;

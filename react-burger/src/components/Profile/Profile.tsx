@@ -1,15 +1,15 @@
 import { EmailInput, PasswordInput, Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../../services/actions/user";
 import styles from "./profile.module.css";
 import { RootState } from "../../services/reducers";
 import useForm from "../../utils/hooks/useForm";
+import { useAppDispatch, useAppSelector } from "../../services/hooks";
 
   
 function Profile(): JSX.Element {
-  const dispatch = useDispatch();
-  const user = useSelector((store: RootState) => store.user.user);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((store: RootState) => store.user.user);
   const [showButtons, setShowButtons] = useState(false);
   const [passwordChanged, setPasswordChanged] = useState(false);
   

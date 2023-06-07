@@ -1,12 +1,12 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styles from "./modal.module.css";
 import { RootState } from '../../services/reducers';
 import { TIngredient } from "../../utils/types/ingredients-types";
+import { useAppSelector } from '../../services/hooks';
 
 function IngredientDetails(): JSX.Element {
     const { id } = useParams(); 
-    const { ingredients }: { ingredients: TIngredient[] } = useSelector((store: RootState) => store.ingredients);
+    const { ingredients }: { ingredients: TIngredient[] } = useAppSelector((store: RootState) => store.ingredients);
 
     const ingredient = ingredients.find((el) => el._id === id);
         

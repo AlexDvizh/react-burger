@@ -1,52 +1,104 @@
+import { useParams } from "react-router-dom";
 import styles from "./feed-show-order.module.css";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useAppSelector } from "../../services/hooks";
+import { countTotalById, getIngredientInfoById } from "../../utils/utils";
 
-function FeedShowOrder(): JSX.Element {
+function FeedShowOrder({
+  isModal,
+  isProfileOrder,
+}: {
+  isModal: boolean;
+  isProfileOrder: boolean;
+}): JSX.Element {
+  const { id } = useParams();
+
+  const order = useAppSelector(
+    !isProfileOrder
+      ? (store) => store.wsFeed.orders.find((el) => el._id === id)
+      : (store) => store.wsProfile.orders.find((el) => el._id === id)
+  );
+  const { ingredients } = useAppSelector((store) => store.ingredients);
+
+  const urlPriceQtyList = getIngredientInfoById(
+    order!.ingredients,
+    ingredients
+  );
+  
+  const total = countTotalById(order!.ingredients, ingredients);
+  const status =
+    order && order.status === OrderStatusEn.DONE ? (
+      <p className="mb-15 text text_type_main-small">
+        <span className={`${styles.status_colored}`}>{OrderStatusRu.DONE}</span>
+      </p>
+    ) : order && order.status === OrderStatusEn.CREATED ? (
+      <p className="mb-15 text text_type_main-small">
+        <span>{OrderStatusRu.CREATED}</span>
+      </p>
+    ) : (
+      <p className="mb-15 text text_type_main-small">
+        <span>{OrderStatusRu.PENDING}</span>
+      </p>
+    );
+
   return (
     <>
-      <h1 className="mt-10 mb-10 text text_type_digits-default">#3303030</h1>
-      <p className="mb-3 text text_type_main-medium">My Burger</p>
-      <p className="mb-15 text text_type_main-small">
-        <span>Выполнен</span>
-      </p>
+      <div className="p-10">
+      {!isModal && (
+        <h1
+          className={`mt-10 mb-10 text text_type_digits-default ${styles.header_id}`}
+        >
+          #{order?.number}
+        </h1>
+      )}
+      <p className="mb-3 text text_type_main-medium">{order?.name}</p>
+      {status && status}
       <h2 className="mb-6 text text_type_main-medium">Состав:</h2>
       <div className={`mb-10 ${styles.ingredients_box}`}>
-        <Ingredient />
-        <Ingredient />
-        <Ingredient />
-        <Ingredient />
-        <Ingredient />
+        {urlPriceQtyList.map((el, index) => (
+          <Ingredient
+            url={el.url}
+            price={el.price}
+            name={el.name}
+            qty={el.qty}
+            key={index}
+          />
+        ))}
       </div>
       <div className={`${styles.footer}`}>
         <p className="text text_type_main-small text_color_inactive">
-          Вчера, 13:50 i-GMT+3
+          <FormattedDate date={new Date(order!.createdAt)} />
         </p>
         <div className={`${styles.flex_wrapper}`}>
-          <p className="text text_type_digits-default">510</p>
+          <p className="text text_type_digits-default">{total}</p>
           <CurrencyIcon type="primary" />
         </div>
       </div>
-    </>
+    </div>
+  </>
   );
 }
 
-function Ingredient(): JSX.Element {
+function Ingredient({ url, price, name, qty }: 
+  {
+  url: string;
+  price: number;
+  name: string;
+  qty: number;
+  }): JSX.Element {
+
   return (
     <div className={`mr-6 ${styles.ingredient}`}>
       <div className={`${styles.flex_wrapper}`}>
         <div className={`${styles.img_wrapper}`}>
-          <img
-            src="https://code.s3.yandex.net/react/code/bun-02-mobile.png"
-            alt="test"
-            className={`${styles.ingredients_img}`}
-          />
+          <img src={url} alt="test" className={`${styles.ingredients_img}`} />
         </div>
-        <p className="text text_type_main-small">
-          Соус традиционный галактический
-        </p>
+        <p className="text text_type_main-small">{name}</p>
       </div>
       <div className={`${styles.flex_wrapper}`}>
-        <p className="text text_type_digits-default">1 x 30</p>
+        <p className="text text_type_digits-default">
+          {qty} x {price}
+        </p>
         <CurrencyIcon type="primary" />
       </div>
     </div>

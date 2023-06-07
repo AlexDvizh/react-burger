@@ -2,7 +2,7 @@ import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-dev
 import { FC } from 'react';
 import styles from "./appHeader.module.css";
 import { NavLink, useMatch } from 'react-router-dom';
-import { useAppSelector } from '../../services/types';
+import { useAppSelector } from '../../services/hooks';
 import { RootState } from '../../services/reducers';
 
 

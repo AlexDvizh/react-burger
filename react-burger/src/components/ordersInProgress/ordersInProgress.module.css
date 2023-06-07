@@ -1,7 +1,7 @@
 .status {
-  composes: status from "../orders-ready/orders-ready.module.css";
+  composes: status from "../ordersReady/ordersReady.module.css";
 }
 
 .ordersId {
-  composes: ordersId from "../orders-ready/orders-ready.module.css";
+  composes: ordersId from "../ordersReady/ordersReady.module.css";
 }
