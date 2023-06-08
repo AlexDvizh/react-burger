@@ -1,6 +1,11 @@
+.status_colored {
+  color: #00cccc;
+}
+
 .feed_order_card {
   border-radius: 20px;
   background-color: #1c1c21;
+  text-align: start;
 }
 
 .card_header {
@@ -27,14 +32,25 @@
   margin-left: -20px;
 }
 
+.ingredients_img_box .img_wrapper:last-child {
+  position: relative;
+}
+
 .img_wrapper {
-  background-color: #131316;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
+  background-color: #131316;
   border: 2px solid #4c4cff;
+}
+
+.img_wrapper_empty {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  transform: translateY(-50%) translateX(-50%);
 }
 
 .ingredients_img {

@@ -10,10 +10,10 @@ function RegisterPage(): JSX.Element {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/login");
+    if (isLoggedIn) {
+      navigate("/");
     }
-  });
+  }, [navigate, isLoggedIn]);
   
   return (
     <div className={styles.main}>

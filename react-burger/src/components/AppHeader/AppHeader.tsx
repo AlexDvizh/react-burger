@@ -8,10 +8,6 @@ import { RootState } from '../../services/slices';
 
 const AppHeader: FC = () => {
     const user = useAppSelector((state: RootState) => state.auth.user);
-
-    const isConstructor = !!useMatch({ path: '/' });
-    const isHistory = !!useMatch('/history');
-    const isProfile = !!useMatch('/profile');
     
     return (
         <header className={styles.header}>
@@ -24,18 +20,18 @@ const AppHeader: FC = () => {
                                 isActive ? styles.navLinkActive : styles.navLink
                             }
                         >
-                            <BurgerIcon type={isConstructor ? 'primary' : 'secondary'}/>
+                            <BurgerIcon type='primary'/>
                             <p className="text text_type_main-small pl-2">Конструктор</p>
                         </NavLink>
                     </div>
                     <div className={`p-4 ${styles.navigationItem}`}>
                         <NavLink
-                            to='/history'
+                            to='/feed'
                             className={({ isActive }) =>
                                 isActive ? styles.navLinkActive : styles.navLink
                             }
                         >
-                            <ListIcon type={isHistory ? 'primary' : 'secondary'}/>
+                            <ListIcon type='primary'/>
                             <p className="text text_type_main-small pl-2">Лента заказов</p>
                         </NavLink>
                     </div>
@@ -51,7 +47,7 @@ const AppHeader: FC = () => {
                             isActive ? styles.navLinkActive : styles.navLink
                         }
                     >
-                        <ProfileIcon type={isProfile ? 'primary' : 'secondary'} />
+                        <ProfileIcon type='primary' />
                         <p className="text text_type_main-small pl-2">{user ? user.name : "Личный кабинет"}</p>
                     </NavLink>
                 </div>

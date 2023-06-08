@@ -30,12 +30,12 @@ export const ingredientsSlice = createSlice({
   reducers: {
     counterIncrease(state, action) {
       state.ingredients = state.ingredients.map((el) =>
-        el._id === action.payload ? { ...el, qty: el.qty + 1 } : el
+        el._id === action.payload ? { ...el, qty: el.count + 1 } : el
       );
     },
     counterDecrease(state, action) {
       state.ingredients = state.ingredients.map((el) =>
-        el._id === action.payload ? { ...el, qty: el.qty - 1 } : el
+        el._id === action.payload ? { ...el, qty: el.count - 1 } : el
       );
     },
     changeBun(state) {
@@ -52,7 +52,7 @@ export const ingredientsSlice = createSlice({
       .addCase(fetchIngredients.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.ingredients = action.payload!.map((el) => {
-          el["qty"] = 0;
+          el["count"] = 0;
           return el;
         });
         state.ingredientsLoaded = true;

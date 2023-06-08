@@ -34,6 +34,7 @@ import { getCookie } from '../../utils/cookie';
 import { useAppDispatch } from '../../services/hooks';
 import { ProfileSharedLayout } from '../../pages/Profile-shared-layout';
 import Profile from '../Profile/Profile';
+import { FeedShowOrder } from '../feedShowOrder/feedShowOrder';
 
 
 const App: FC = () => {
@@ -131,6 +132,32 @@ const App: FC = () => {
             <IngredientDetails />
           </Modal>
           } 
+        />
+        <Route
+          path="/feed/:id"
+          element={
+            <Modal
+              handleModalClose={handleModalClose}
+              showId={true}
+              isProfileOrder={false}
+            >
+              <FeedShowOrder isModal={true} isProfileOrder={false} />
+            </Modal>
+          }
+        />
+        <Route
+          path="/profile/orders/:id"
+          element={
+            <Modal
+              handleModalClose={handleModalClose}
+              showId={true}
+              isProfileOrder={true}
+            >
+              <ProtectedRoute onlyUnAuth={false}>
+                <FeedShowOrder isModal={true} isProfileOrder={true} />
+              </ProtectedRoute>
+            </Modal>
+          }
         />
       </Routes>
       }

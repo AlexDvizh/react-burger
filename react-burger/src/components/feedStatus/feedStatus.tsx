@@ -5,11 +5,11 @@ import { OrdersFinishedToday } from "../ordersFinishedToday/ordersFinishedToday"
 
 function FeedStatus(): JSX.Element {
   return (
-    <section className={`${styles.feed_status_section}`}>
+    <div className={`${styles.feed_status_section}`}>
       <OrdersStatus />
       <OrdersFinishedAllTime />
       <OrdersFinishedToday />
-    </section>
+    </div>
   );
 }
 
