@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import DragAndDropContainer from './DragAndDropContainer';
 import BurgerConstructorOrder from './BurgerOrder';
-import { useAppSelector } from '../../services/hooks';
+import { useAppDispatch, useAppSelector } from '../../services/hooks';
 import { RootState } from '../../services/slices';
 import { TIngredient } from '../../utils/types/ingredients-types';
 import { changeBun, counterIncrease } from '../../services/slices/ingredients';
@@ -19,7 +19,7 @@ import { nanoid } from '@reduxjs/toolkit';
 function BurgerConstructor(): JSX.Element {
     const { ingredients } = useAppSelector((state: RootState) => state.constructorBurger);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const emptyBun = useMemo(() => {
         if(!ingredients.bun.name) {

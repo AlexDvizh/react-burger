@@ -21,12 +21,12 @@ function Modal({
     isProfileOrder: boolean;
     children: React.ReactNode;
     }): JSX.Element {
+    const { id } = useParams();
     const orderNumber = useAppSelector(
         !isProfileOrder
             ? (store) => store.wsFeed.orders.find((el) => el._id === id)
             : (store) => store.wsProfile.orders.find((el) => el._id === id)
-        )?.number;
-    const { id } = useParams();
+    )?.number;
     
     useEffect(() => {
         function handleKeyDown(event: KeyboardEvent | React.KeyboardEvent) {

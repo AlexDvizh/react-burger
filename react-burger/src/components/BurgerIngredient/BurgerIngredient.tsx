@@ -14,7 +14,6 @@ function BurgerIngredient({
   }): JSX.Element {
     const location = useLocation();
     const item = useAppSelector((state: RootState) => {
-        //@ts-ignore
       return  state.ingredients.ingredients.filter((item) => item._id === ingredient._id)
     });
     

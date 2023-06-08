@@ -40,10 +40,8 @@ function Profile(): JSX.Element {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!passwordChanged) {
-      //@ts-ignore
       dispatch(updateUser({ name: form.name, email: form.email }));
     } else {
-      //@ts-ignore
       dispatch(updateUser(form));
     }
     setShowButtons(false);

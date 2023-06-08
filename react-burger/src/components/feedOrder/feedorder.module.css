@@ -26,6 +26,7 @@
 
 .ingredients_img_box {
   display: flex;
+  z-index: 1;
 }
 
 .ingredients_img_box div:not(:first-child) {

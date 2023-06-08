@@ -4,7 +4,6 @@ import { useDrag, useDrop } from "react-dnd";
 import styles from "./burgerConstructor.module.css";
 
 import { useAppDispatch, useAppSelector } from '../../services/hooks';
-import { RootState } from '../../services/slices';
 import { TIngredient, TIngredientWithUniqueId } from '../../utils/types/ingredients-types';
 import type { Identifier, XYCoord } from "dnd-core";
 import { counterDecrease } from "../../services/slices/ingredients";

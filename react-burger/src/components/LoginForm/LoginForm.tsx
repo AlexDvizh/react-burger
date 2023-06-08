@@ -15,8 +15,7 @@ const LoginForm = () => {
 
     const submitForm = (event:React.FormEvent) => {
       event.preventDefault();
-      //@ts-ignore
-      dispatch(login(props.form));
+      dispatch(login(form));
     };
 
     return (

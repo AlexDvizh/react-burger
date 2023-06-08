@@ -61,7 +61,7 @@ function FeedShowOrder({
             url={el.url}
             price={el.price}
             name={el.name}
-            count={el.count}
+            qty={el.qty}
             key={index}
           />
         ))}
@@ -80,12 +80,12 @@ function FeedShowOrder({
   );
 }
 
-function Ingredient({ url, price, name, count }: 
+function Ingredient({ url, price, name, qty }: 
   {
   url: string;
   price: number;
   name: string;
-  count: number;
+  qty: number;
   }): JSX.Element {
 
   return (
@@ -98,7 +98,7 @@ function Ingredient({ url, price, name, count }:
       </div>
       <div className={`${styles.flex_wrapper}`}>
         <p className="text text_type_digits-default">
-          {count} x {price}
+          {qty} x {price}
         </p>
         <CurrencyIcon type="primary" />
       </div>

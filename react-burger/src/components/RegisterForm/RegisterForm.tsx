@@ -19,7 +19,6 @@ function RegisterForm(): JSX.Element {
 
   const submitForm = (event: React.FormEvent) => {
     event.preventDefault();
-    //@ts-ignore
     dispatch(register(form));
   };
 

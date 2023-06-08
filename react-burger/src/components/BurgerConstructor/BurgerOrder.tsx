@@ -41,7 +41,6 @@ function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
 
     const makeOrder = () => {
         if (!emptyBun && prevIngredientsId.current !== ingredientsId && isLoggedIn) {
-        // @ts-ignore
         dispatch(setOrderId(ingredientsId));
         } else if (!isLoggedIn) {
             navigate("/login", { state: { from: location } });
