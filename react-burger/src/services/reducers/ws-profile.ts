@@ -7,7 +7,7 @@ import {
   wsConnecting,
 } from "../actions/ws-profile";
 
-import { WebSocketStatus, IWSOrder } from "../../types/web-socket";
+import { WebSocketStatus, IWSOrder } from "../types/web-socket";
 
 interface IWSProfileReducer {
   status: WebSocketStatus;

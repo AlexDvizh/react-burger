@@ -5,7 +5,7 @@ import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../services/hooks';
 import { TIngredient } from "../../utils/types/ingredients-types";
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
 
 function BurgerIngredient({
     ingredient,

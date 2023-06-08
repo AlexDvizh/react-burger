@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from "./burgerIngredients.module.css";
 import { TIngredient } from "../../utils/types/ingredients-types";
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
 import { useAppSelector } from '../../services/hooks';
 
 const BurgerIngredients = () => {

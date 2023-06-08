@@ -1,20 +1,23 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useMemo } from 'react';
-import {
-    INGREDIENTS_COUNTER_INCREASE, CHANGE_BUN,
-} from "../../services/actions/ingredients";
-import { ADD_FILLING, ADD_BUN } from "../../services/actions/constructorIngredients";
+// import {
+//     INGREDIENTS_COUNTER_INCREASE, CHANGE_BUN,
+// } from "../../services/actions/ingredients";
+// import { ADD_FILLING, ADD_BUN } from "../../services/slices/ingredients";
 import styles from "./burgerConstructor.module.css";
 import { useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import DragAndDropContainer from './DragAndDropContainer';
 import BurgerConstructorOrder from './BurgerOrder';
 import { useAppSelector } from '../../services/hooks';
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
 import { TIngredient } from '../../utils/types/ingredients-types';
+import { changeBun, counterIncrease } from '../../services/slices/ingredients';
+import { addBun, addFilling } from '../../services/slices/constructor';
+import { nanoid } from '@reduxjs/toolkit';
 
 function BurgerConstructor(): JSX.Element {
-    const { ingredients } = useAppSelector((state: RootState) => state.burgerConstructor);
+    const { ingredients } = useAppSelector((state: RootState) => state.constructorBurger);
 
     const dispatch = useDispatch();
 
@@ -24,35 +27,20 @@ function BurgerConstructor(): JSX.Element {
         }
         return false;
     }, [ingredients])
-
-    const [, dropTarget] = useDrop<any>({
-        accept: ['bun', 'main', 'sauce'],
-        drop({ingredient}: {ingredient: TIngredient}) {
-            if(ingredient.type === 'bun') {
-                dispatch({
-                    type: CHANGE_BUN,
-                    id: ingredient._id
-                })
-                dispatch({
-                    type: ADD_BUN,
-                    ingredient: ingredient,
-                  });
-                dispatch({
-                    type: INGREDIENTS_COUNTER_INCREASE,
-                    id: ingredient._id,
-                });
-            } else {
-                dispatch({
-                  type: ADD_FILLING,
-                  ingredient: ingredient,
-                });
-                dispatch({
-                  type: INGREDIENTS_COUNTER_INCREASE,
-                  id: ingredient._id,
-                });
-            }
-        }
-    })
+   
+    const [, dropTarget] = useDrop({
+        accept: ["bun", "main", "sauce"],
+        drop({ ingredient }: { ingredient: TIngredient }) {
+          if (ingredient.type === "bun") {
+            dispatch(changeBun());
+            dispatch(addBun(ingredient));
+            dispatch(counterIncrease(ingredient._id));
+          } else {
+            dispatch(addFilling({ ingredient, uuid: nanoid() }));
+            dispatch(counterIncrease(ingredient._id));
+          }
+        },
+      });
   
     return (
         // @ts-ignore

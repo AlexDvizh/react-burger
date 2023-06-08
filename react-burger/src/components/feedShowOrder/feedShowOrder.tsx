@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import styles from "./feed-show-order.module.css";
+import styles from "./feedShowOrder.module.css";
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useAppSelector } from "../../services/hooks";
 import { countTotalById, getIngredientInfoById } from "../../utils/utils";
+import { OrderStatusEn, OrderStatusRu } from "../../services/types/web-socket";
 
 function FeedShowOrder({
   isModal,

@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { RootState } from "../services/reducers";
-import { useAppSelector } from "../services/types/web-socket";
+import { RootState } from "../services/slices";
+import { useAppSelector } from "../services/hooks";
 
 function ProtectedRoute({
   onlyUnAuth = false, children }: { onlyUnAuth: boolean; children: React.ReactElement; }): JSX.Element {
@@ -12,7 +12,7 @@ function ProtectedRoute({
     return <Navigate to={"/login"} replace state={{ from: location }} />;
   }
 
-  if (onlyUnAuth && user.hasOwnProperty("email")) {
+  if (onlyUnAuth && user) {
     return <Navigate to={from} />;
   }
 

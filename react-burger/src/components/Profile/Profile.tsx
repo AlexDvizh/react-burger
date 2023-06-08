@@ -1,21 +1,21 @@
 import { EmailInput, PasswordInput, Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
-import { updateUser } from "../../services/actions/user";
+import { updateUser } from "../../services/slices/auth";
 import styles from "./profile.module.css";
-import { RootState } from "../../services/reducers";
+import { RootState } from "../../services/slices";
 import useForm from "../../utils/hooks/useForm";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 
   
 function Profile(): JSX.Element {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((store: RootState) => store.user.user);
+  const user = useAppSelector((store: RootState) => store.auth.user);
   const [showButtons, setShowButtons] = useState(false);
   const [passwordChanged, setPasswordChanged] = useState(false);
   
   const { form, handleChange, setForm } = useForm({
-    name: user.username,
-    email: user.email,
+    name: user!.name,
+    email: user!.email,
     password: "",
   });
 
@@ -29,8 +29,8 @@ function Profile(): JSX.Element {
 
   const handleCancel = () => {
     setForm({
-      name: user.username,
-      email: user.email,
+      name: user!.name,
+      email: user!.email,
       password: "********",
     });
     setShowButtons(false);

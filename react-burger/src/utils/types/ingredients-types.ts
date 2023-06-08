@@ -13,9 +13,9 @@ export type TIngredientResponse = {
   __v: number;
 };
 
-export type TIngredient = TIngredientResponse & { qty: number };
+export type TIngredient = TIngredientResponse & { count: number };
 
-export type TIngredientWithUniqueId = TIngredient & { nanoid: string };
+export type TIngredientWithUniqueId = TIngredient & { uuid: string };
 
 export type TIngredientsConstructor = {
   bun: TIngredient | any;

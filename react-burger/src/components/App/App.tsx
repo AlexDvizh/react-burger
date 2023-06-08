@@ -3,25 +3,23 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import AppHeader from '../AppHeader/AppHeader'; 
 import styles from "./app.module.css";
 
-import { getIngredients } from '../../services/actions/ingredients';
+import { fetchIngredients } from '../../services/slices/ingredients';
 import ConstructorPage from '../../pages/ConstructorPage';
 import LoginPage from '../../pages/LoginPage';
 import RegisterPage from '../../pages/RegisterPage';
 import ForgotPasswordPage from '../../pages/ForgotPasswordPage';
 import ResetPasswordPage from '../../pages/ResetPasswordPage';
 import ProfilePage from '../../pages/ProfilePage';
-import ProfileSharedLayout from '../../pages/ProfileSharedLayout';
 
 import ProtectedRoute from '../Protected-route';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../Modal/IngredientDetails';
 import { INGREDIENT_MODAL_TITLE, WS_ORDERS_API, WS_PROFILE_ORDERS_API } from '../../utils/utils';
-import { getUser } from '../../services/actions/authentication';
+import { getUser } from '../../services/slices/auth';
 
 import { ProfileOrders } from "../profileOrders/profileOrders";
 import { FeedPage } from "../../pages/FeedPage";
 import { FeedShowOrderPage } from "../../pages/FeedShowOrderPage";
-import { FeedShowOrder } from "../feed-show-order/feed-show-order";
 
 import {
   connect as connectWsFeed,
@@ -33,7 +31,9 @@ import {
   disconnect as disconnectWsProfile,
 } from "../../services/actions/ws-profile";
 import { getCookie } from '../../utils/cookie';
-import { useAppSelector, useAppDispatch } from '../../services/types/web-socket';
+import { useAppDispatch } from '../../services/hooks';
+import { ProfileSharedLayout } from '../../pages/Profile-shared-layout';
+import Profile from '../Profile/Profile';
 
 
 const App: FC = () => {
@@ -44,8 +44,8 @@ const App: FC = () => {
   const accessToken = getCookie("accessToken")?.slice(7);
 
   useEffect(() => {
-    dispatch(getIngredients() as any)
-    dispatch(getUser() as any);  
+    dispatch(fetchIngredients())
+    dispatch(getUser());  
   }, [dispatch])
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const App: FC = () => {
         <Route path="/" element={<ConstructorPage />} />
         <Route path="/feed">
           <Route index element={<FeedPage />} />
-          <Route path=":id" element={<FeedShowOrderPage />} />
+          <Route path=":id" element={<FeedShowOrderPage isProfileOrder={false}/>} />
         </Route>
         <Route path="/login" element={
           <ProtectedRoute onlyUnAuth={true}>
@@ -91,27 +91,42 @@ const App: FC = () => {
         } />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/profile" element={
-          <ProtectedRoute onlyUnAuth={false}>
-            <ProfilePage />
-          </ProtectedRoute>
-           <Route
-           path="orders"
-           element={
-             <ProtectedRouteElement onlyUnAuth={false}>
-               <ProfileOrders />
-             </ProtectedRouteElement>
-           }
-         />
-        } />
-        <Route path="/ingredients/:id" element={<IngredientDetails />} />
-      </Routes>
+        <Route path="/profile" element={<ProfileSharedLayout />}>
+            <Route
+              index
+              element={
+                <ProtectedRoute onlyUnAuth={false}>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="orders"
+              element={
+                <ProtectedRoute onlyUnAuth={false}>
+                  <ProfileOrders />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+          <Route
+            path="/profile/orders/:id"
+            element={
+              <ProtectedRoute onlyUnAuth={false}>
+                <FeedShowOrderPage isProfileOrder={true} />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/ingredients/:id" element={<IngredientDetails />} />
+        </Routes>
       { background &&
       <Routes>
         <Route path='/ingredients/:id' element={
           <Modal 
             title={INGREDIENT_MODAL_TITLE} 
             handleModalClose={handleModalClose} 
+            showId={true}
+            isProfileOrder={true}
           >
             <IngredientDetails />
           </Modal>

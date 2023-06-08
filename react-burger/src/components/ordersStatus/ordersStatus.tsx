@@ -1,4 +1,4 @@
-import styles from "./orders-status.module.css";
+import styles from "./ordersStatus.module.css";
 import { OrdersReady } from "../ordersReady/ordersReady";
 import { OrdersInProgress } from "../ordersInProgress/ordersInProgress";
 import { useAppSelector } from "../../services/hooks";

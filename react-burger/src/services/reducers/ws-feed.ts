@@ -7,7 +7,7 @@ import {
   wsConnecting,
 } from "../actions/ws-feed";
 
-import { WebSocketStatus, IWSOrder } from "../../types/web-socket";
+import { WebSocketStatus, IWSOrder } from "../types/web-socket";
 
 interface IWSFeedReducer {
   status: WebSocketStatus;

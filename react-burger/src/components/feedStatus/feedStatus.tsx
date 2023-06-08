@@ -1,4 +1,4 @@
-import styles from "./feed-status.module.css";
+import styles from "./feedStatus.module.css";
 import { OrdersStatus } from "../ordersStatus/ordersStatus";
 import { OrdersFinishedAllTime } from "../ordersFinishedAllTime/ordersFinishedAllTime";
 import { OrdersFinishedToday } from "../ordersFinishedToday/ordersFinishedToday";

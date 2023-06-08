@@ -3,12 +3,11 @@ import { FC } from 'react';
 import styles from "./appHeader.module.css";
 import { NavLink, useMatch } from 'react-router-dom';
 import { useAppSelector } from '../../services/hooks';
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
 
 
 const AppHeader: FC = () => {
-    const user = useAppSelector((state: RootState) => state.user.user);
-    const userName = user.username ? user.username : "Личный кабинет";
+    const user = useAppSelector((state: RootState) => state.auth.user);
 
     const isConstructor = !!useMatch({ path: '/' });
     const isHistory = !!useMatch('/history');
@@ -53,7 +52,7 @@ const AppHeader: FC = () => {
                         }
                     >
                         <ProfileIcon type={isProfile ? 'primary' : 'secondary'} />
-                        <p className="text text_type_main-small pl-2">{userName}</p>
+                        <p className="text text_type_main-small pl-2">{user ? user.name : "Личный кабинет"}</p>
                     </NavLink>
                 </div>
             </div>

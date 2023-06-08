@@ -2,7 +2,7 @@ import {} from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from "./modal.module.css";
 //@ts-ignore
 import done from "../../images/done.svg";
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
 import { useAppSelector } from '../../services/hooks';
 
 function OrderDetails(): JSX.Element {

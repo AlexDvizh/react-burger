@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import RegisterForm from "../components/RegisterForm/RegisterForm";
 import styles from "./pages.module.css";
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../services/reducers";
-import { useAppSelector } from "../services/types/web-socket";
+import { RootState } from "../services/slices";
+import { useAppSelector } from "../services/hooks";
 
 function RegisterPage(): JSX.Element {
   const { isLoggedIn } = useAppSelector((store: RootState) => store.auth);

@@ -22,20 +22,6 @@ function ResetPasswordForm(): JSX.Element {
       })
       .catch((err) => Promise.reject(err));
   };
-  
-  // useEffect(() => {
-  //   !location?.state?.resetPassword && navigate("/forgot-password")
-  // }, [location.state, navigate])
-
-  // const submitForm = (event) => {
-  //   event.preventDefault();
-  //   resetPasswordConfirm(props.form)
-  //   .then((res) => {
-  //     if (res.success) return navigate("/login");
-  //     if (!res.success) return Promise.reject(res);
-  //   })
-  //   .catch((err) => Promise.reject(err));
-  // };
 
     return (
       <form onSubmit={submitForm}>

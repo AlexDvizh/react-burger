@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import styles from "./modal.module.css";
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
 import { TIngredient } from "../../utils/types/ingredients-types";
 import { useAppSelector } from '../../services/hooks';
 

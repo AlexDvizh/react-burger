@@ -3,8 +3,8 @@ import {
   ActionCreatorWithPayload,
 } from "@reduxjs/toolkit";
 import type { Middleware, MiddlewareAPI, AnyAction } from "redux";
-import type { RootState, AppDispatch } from "../slices";
-import { getUser } from "../slices/auth";
+import type { RootState, AppDispatch } from "../services/slices";
+import { getUser } from "../services/slices/auth";
 
 type TWSStoreActions = {
   wsConnect: ActionCreatorWithPayload<string>;

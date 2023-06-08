@@ -1,5 +1,5 @@
 import { Button, PasswordInput, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { login } from "../../services/actions/authentication";
+import { login } from "../../services/slices/auth";
 import styles from "../../pages/pages.module.css";
 import { NavLink } from "react-router-dom";
 import useForm from "../../utils/hooks/useForm";

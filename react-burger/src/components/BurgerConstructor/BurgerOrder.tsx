@@ -4,17 +4,17 @@ import styles from "./burgerConstructor.module.css";
 
 import Modal from '../Modal/Modal';
 import OrderDetails from '../Modal/OrderDetails';
-import { setOrderId } from '../../services/actions/orderNumber';
+import { setOrderId } from '../../services/slices/order';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../services/hooks';
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
 import { TIngredient, TIngredientWithUniqueId } from '../../utils/types/ingredients-types';
 import { countResult } from '../../utils/utils';
 
 function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
     
     const [popupOpen, setPopupOpen] = useState(false);
-    const { ingredients } = useAppSelector((state: RootState) => state.burgerConstructor);
+    const { ingredients } = useAppSelector((state: RootState) => state.constructorBurger);
     const { isLoggedIn } = useAppSelector((state: RootState) => state.auth);
     const navigate = useNavigate();
     const location = useLocation();

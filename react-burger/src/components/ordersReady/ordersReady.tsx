@@ -1,4 +1,4 @@
-import styles from "./orders-ready.module.css";
+import styles from "./ordersReady.module.css";
 import { IWSOrder } from "../../services/types/web-socket";
 
 function OrdersReady({ done }: { done: Array<IWSOrder> }): JSX.Element {

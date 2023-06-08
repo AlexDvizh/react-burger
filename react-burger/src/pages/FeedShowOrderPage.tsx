@@ -1,5 +1,5 @@
 import { FeedShowOrder } from "../components/feedShowOrder/feedShowOrder";
-import { useAppSelector } from "../services/types/web-socket";
+import { useAppSelector } from "../services/hooks";
 import styles from "./pages.module.css";
 
 function FeedShowOrderPage({ isProfileOrder }: { isProfileOrder: boolean; }): JSX.Element {
