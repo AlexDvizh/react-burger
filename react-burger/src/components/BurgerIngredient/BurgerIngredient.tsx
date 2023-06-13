@@ -3,9 +3,9 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from "./burgerIngredient.module.css";
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../services/types';
+import { useAppSelector } from '../../services/hooks';
 import { TIngredient } from "../../utils/types/ingredients-types";
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
 
 function BurgerIngredient({
     ingredient,
@@ -14,7 +14,6 @@ function BurgerIngredient({
   }): JSX.Element {
     const location = useLocation();
     const item = useAppSelector((state: RootState) => {
-        //@ts-ignore
       return  state.ingredients.ingredients.filter((item) => item._id === ingredient._id)
     });
     

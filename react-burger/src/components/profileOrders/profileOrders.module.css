@@ -1,0 +1,21 @@
+.profile_orders_section {
+  flex: 2;
+}
+
+.scrollable_box {
+  overflow-y: auto;
+  min-height: fit-content;
+  max-height: 70vh;
+}
+
+.scrollable_box::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollable_box::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.scrollable_box::-webkit-scrollbar-thumb {
+  background: #8585ad;
+}

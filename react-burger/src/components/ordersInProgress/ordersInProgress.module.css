@@ -1,0 +1,7 @@
+.status {
+  composes: status from "../ordersReady/ordersReady.module.css";
+}
+
+.ordersId {
+  composes: ordersId from "../ordersReady/ordersReady.module.css";
+}

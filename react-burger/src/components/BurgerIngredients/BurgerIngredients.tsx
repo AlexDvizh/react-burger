@@ -2,12 +2,12 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useEffect, useMemo, useState } from 'react';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from "./burgerIngredients.module.css";
-import { useSelector } from 'react-redux';
 import { TIngredient } from "../../utils/types/ingredients-types";
-import { RootState } from '../../services/reducers';
+import { RootState } from '../../services/slices';
+import { useAppSelector } from '../../services/hooks';
 
 const BurgerIngredients = () => {
-    const { ingredients } : { ingredients: TIngredient[] } = useSelector((state: RootState) => state.ingredients);
+    const { ingredients } : { ingredients: TIngredient[] } = useAppSelector((state: RootState) => state.ingredients);
     const [current, setCurrent] = useState('one');
     const [activeTab, setActiveTab] = useState({active: 'one'});
     

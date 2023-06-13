@@ -1,18 +1,13 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useRef, FC } from "react";
-import { useDispatch, useSelector } from 'react-redux';
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./burgerConstructor.module.css";
 
-import {
-    DELETE_FILLING,
-    MOVE_FILLING,
-} from "../../services/actions/constructorIngredients";
-import { INGREDIENTS_COUNTER_DECREASE } from "../../services/actions/ingredients";
-import { useAppSelector } from '../../services/types';
-import { RootState } from '../../services/reducers';
-import { TIngredient, TIngredientWithUniqueId, TIngredientsWithUniqueId } from '../../utils/types/ingredients-types';
+import { useAppDispatch, useAppSelector } from '../../services/hooks';
+import { TIngredient, TIngredientWithUniqueId } from '../../utils/types/ingredients-types';
 import type { Identifier, XYCoord } from "dnd-core";
+import { counterDecrease } from "../../services/slices/ingredients";
+import { deleteFilling, moveFilling } from "../../services/slices/constructor";
 
 
 type DragAndDrop = {
@@ -23,7 +18,7 @@ type DragAndDrop = {
 
 
 const DragAndDropContainer: FC = () => {
-    const { ingredients }: { ingredients: TIngredientsWithUniqueId } = useAppSelector((state: RootState) => state.burgerConstructor);
+    const { ingredients } = useAppSelector((store) => store.constructorBurger);
 
     return (
         <div className={styles.scrollableBox}>
@@ -45,7 +40,7 @@ const DragAndDropContainer: FC = () => {
 
 
 function DragAndDropItem({ ingredient, index }: { ingredient: TIngredientWithUniqueId; index: number;}):JSX.Element {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const ref = useRef<HTMLDivElement>(null); 
 
@@ -94,7 +89,7 @@ function DragAndDropItem({ ingredient, index }: { ingredient: TIngredientWithUni
             return;
         }
 
-        dispatch({ type: MOVE_FILLING, from: dragIndex, to: hoverIndex });
+        dispatch(moveFilling({ from: dragIndex, to: hoverIndex }));
 
         // Сразу меняем индекс перемещаемого элемента
         item.index = hoverIndex;
@@ -114,8 +109,8 @@ function DragAndDropItem({ ingredient, index }: { ingredient: TIngredientWithUni
     drag(drop(ref));
 
     const deleteIngredient = (uuid:string, id:string) => {
-        dispatch({ type: DELETE_FILLING, uuid });
-        dispatch({ type: INGREDIENTS_COUNTER_DECREASE, id });
+        dispatch(deleteFilling(uuid));
+        dispatch(counterDecrease(id));
     };
 
     return (

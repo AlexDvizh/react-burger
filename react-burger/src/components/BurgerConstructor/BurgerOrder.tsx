@@ -1,25 +1,25 @@
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useRef, useState, useMemo, FC } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState, useMemo } from "react";
 import styles from "./burgerConstructor.module.css";
 
 import Modal from '../Modal/Modal';
 import OrderDetails from '../Modal/OrderDetails';
-import { countResult } from '../../utils/utils';
-import { setOrderId } from '../../services/actions/orderNumber';
+import { setOrderId } from '../../services/slices/order';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../services/types';
-import { RootState } from '../../services/reducers';
+import { useAppSelector, useAppDispatch } from '../../services/hooks';
+import { RootState } from '../../services/slices';
 import { TIngredient, TIngredientWithUniqueId } from '../../utils/types/ingredients-types';
+import { countResult } from '../../utils/utils';
 
 function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
+    
     const [popupOpen, setPopupOpen] = useState(false);
-    const { ingredients } = useAppSelector((state: RootState) => state.burgerConstructor);
+    const { ingredients } = useAppSelector((state: RootState) => state.constructorBurger);
     const { isLoggedIn } = useAppSelector((state: RootState) => state.auth);
     const navigate = useNavigate();
     const location = useLocation();
     
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const orderResult = useMemo(() => {
         return countResult(ingredients)
     }, [ingredients]);
@@ -41,7 +41,6 @@ function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
 
     const makeOrder = () => {
         if (!emptyBun && prevIngredientsId.current !== ingredientsId && isLoggedIn) {
-        // @ts-ignore
         dispatch(setOrderId(ingredientsId));
         } else if (!isLoggedIn) {
             navigate("/login", { state: { from: location } });
@@ -82,6 +81,8 @@ function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
             {popupOpen && (
                 <Modal
                     handleModalClose={handlePopupClose}
+                    showId={false}
+                    isProfileOrder={false}
                 >
                     <OrderDetails />
                 </Modal>

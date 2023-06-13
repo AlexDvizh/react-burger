@@ -1,4 +1,4 @@
-export type TIngredient = {
+export type TIngredientResponse = {
   _id: string;
   name: string;
   type: "bun" | "main" | "sauce";
@@ -11,12 +11,13 @@ export type TIngredient = {
   image_mobile: string;
   image_large: string;
   __v: number;
-  qty?: number;
 };
+
+export type TIngredient = TIngredientResponse & { count: number };
 
 export type TIngredientWithUniqueId = TIngredient & { uuid: string };
 
-export type TIngredientsWithUniqueId = {
+export type TIngredientsConstructor = {
   bun: TIngredient | any;
   fillings: TIngredientWithUniqueId[] | Array<any>;
 };
