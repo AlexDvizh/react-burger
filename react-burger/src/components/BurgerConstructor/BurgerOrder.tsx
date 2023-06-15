@@ -58,7 +58,7 @@ function BurgerConstructorOrder({emptyBun}: {emptyBun: boolean}): JSX.Element {
 
     return (
         <>
-            <div className={styles.info}>
+            <div className={styles.info} data-test="confirm-container">
                 <p className="text text_type_digits-medium mr-2">
                     {orderResult}
                 </p>
