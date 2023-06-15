@@ -15,7 +15,7 @@ import {
 import { setCookie } from "../../utils/cookie";
 import { deleteCookie } from "../../utils/cookie";
 
-interface IAuthSliceState {
+export interface IAuthSliceState {
   registerStatus: string;
   loginStatus: string;
   logoutStatus: string;

@@ -2,14 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getIngredientsRequest } from "../../utils/api";
 import { TIngredient } from "../../utils/types/ingredients-types";
 
-interface IIngredientsSlice {
+export interface IIngredientsSlice {
   status: string;
   ingredients: Array<TIngredient>;
   ingredientsLoaded: boolean;
   error: unknown;
 }
 
-const initialState: IIngredientsSlice = {
+export const initialState: IIngredientsSlice = {
   status: "uninitialized",
   ingredients: [],
   ingredientsLoaded: false,

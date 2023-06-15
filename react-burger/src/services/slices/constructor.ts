@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TIngredientsConstructor } from "../../utils/types/ingredients-types";
 
-interface IConstructorSlice {
+export interface IConstructorSlice {
   ingredients: TIngredientsConstructor;
 }
 
-const initialState: IConstructorSlice = {
+export const initialState: IConstructorSlice = {
   ingredients: {
     bun: {},
     fillings: [],

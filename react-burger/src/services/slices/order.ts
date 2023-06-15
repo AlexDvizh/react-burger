@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postOrderRequest } from "../../utils/api";
 
-interface IOrderSlice {
+ export interface IOrderSlice {
   status: string;
   orderId: number | undefined;
   error: unknown;
 }
 
-const initialState: IOrderSlice = {
+export const initialState: IOrderSlice = {
   status: "uninitialized",
   orderId: undefined,
   error: null,
