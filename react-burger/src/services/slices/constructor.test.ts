@@ -46,7 +46,7 @@ test("should handle adding fillings to empty ingredints: fillings", () => {
   expect(
     reducer(
       initialState,
-      addFilling({ ingredient: addedFilling, nanoid: "1mjhDAF9C2nhBmo5kzDVW" })
+      addFilling({ ingredient: addedFilling, uuid: "1mjhDAF9C2nhBmo5kzDVW" })
     )
   ).toEqual({
     ingredients: {
@@ -67,7 +67,7 @@ test("should handle adding fillings to not empty ingredients: fillings", () => {
   expect(
     reducer(
       initialState,
-      addFilling({ ingredient: addedFilling, nanoid: "1mjhDAF9C2nhBmo5kzDVW" })
+      addFilling({ ingredient: addedFilling, uuid: "1mjhDAF9C2nhBmo5kzDVW" })
     )
   ).toEqual({
     ingredients: {

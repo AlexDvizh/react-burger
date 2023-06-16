@@ -9,7 +9,8 @@ import { RootState } from '../../services/slices';
 import { TIngredient } from '../../utils/types/ingredients-types';
 import { changeBun, counterIncrease } from '../../services/slices/ingredients';
 import { addBun, addFilling } from '../../services/slices/constructor';
-import { nanoid } from '@reduxjs/toolkit';
+import { uuid } from 'uuidv4';
+
 
 function BurgerConstructor(): JSX.Element {
     const { ingredients } = useAppSelector((state: RootState) => state.constructorBurger);
@@ -31,7 +32,7 @@ function BurgerConstructor(): JSX.Element {
             dispatch(addBun(ingredient));
             dispatch(counterIncrease(ingredient._id));
           } else {
-            dispatch(addFilling({ ingredient, uuid: nanoid() }));
+            dispatch(addFilling({ ingredient, uuid: uuid() }));
             dispatch(counterIncrease(ingredient._id));
           }
         },

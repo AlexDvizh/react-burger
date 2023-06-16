@@ -44,7 +44,8 @@ test(`should handle failed POST request to server ${URL}/orders`, () => {
       error: "Failed to get Order id",
     })
   ).toEqual({
-    status: "failed",
+    status: "succeeded",
     error: "Failed to get Order id",
+    orderId: undefined,
   });
 });

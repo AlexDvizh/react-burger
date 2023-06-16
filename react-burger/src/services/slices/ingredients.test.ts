@@ -41,7 +41,7 @@ test("should handle sending a POST request to fetch ingredients from the server"
   });
 });
 
-test("should handle getting ingredients from the server and setting state.ingredients and adding to each ingredient 'qty' property equals to 0", () => {
+test("should handle getting ingredients from the server and setting state.ingredients and adding to each ingredient 'count' property equals to 0", () => {
   expect(
     reducer(initialState, {
       type: fetchIngredients.fulfilled.type,
@@ -69,7 +69,7 @@ test(`should handle failed POST request to server ${URL}/ingredients`, () => {
   });
 });
 
-test("should handle an ingredeint's qty property to be increased by 1", () => {
+test("should handle an ingredeint's count property to be increased by 1", () => {
   const previousState: IIngredientsSlice = {
     status: "succeeded",
     ingredients: structuredClone(mockedIngredientsDataWithQty),
@@ -77,7 +77,7 @@ test("should handle an ingredeint's qty property to be increased by 1", () => {
     error: null,
   };
   const expectedIngredients = structuredClone(mockedIngredientsDataWithQty);
-  expectedIngredients[0].qty = 1;
+  expectedIngredients[0].count = 1;
   expect(reducer(previousState, counterIncrease(mockedBun._id))).toEqual({
     status: "succeeded",
     ingredients: expectedIngredients,
@@ -86,9 +86,9 @@ test("should handle an ingredeint's qty property to be increased by 1", () => {
   });
 });
 
-test("should handle an ingredeint's qty property to be decreased by 1", () => {
+test("should handle an ingredeint's count property to be decreased by 1", () => {
   const previousIngredients = structuredClone(mockedIngredientsDataWithQty);
-  previousIngredients[0].qty = 1;
+  previousIngredients[0].count = 1;
   const previousState: IIngredientsSlice = {
     status: "succeeded",
     ingredients: previousIngredients,
@@ -96,7 +96,7 @@ test("should handle an ingredeint's qty property to be decreased by 1", () => {
     error: null,
   };
   const expectedIngredients = structuredClone(mockedIngredientsDataWithQty);
-  expectedIngredients[0].qty = 0;
+  expectedIngredients[0].count = 0;
   expect(reducer(previousState, counterDecrease(mockedBun._id))).toEqual({
     status: "succeeded",
     ingredients: expectedIngredients,
@@ -105,7 +105,7 @@ test("should handle an ingredeint's qty property to be decreased by 1", () => {
   });
 });
 
-test("should handle setting bun's qty to 0", () => {
+test("should handle setting bun's count to 0", () => {
   //copy mockedData
   const previousIngredients: Array<TIngredient> = structuredClone(
     mockedIngredientsDataWithQty
@@ -115,7 +115,7 @@ test("should handle setting bun's qty to 0", () => {
   const firstBunIndex = previousIngredients.findIndex(
     (el) => el.type === "bun"
   );
-  // delete from the copied array first bun and add new bun with qty: 1 to the same postiion
+  // delete from the copied array first bun and add new bun with count: 1 to the same postiion
   previousIngredients.splice(firstBunIndex, 1, { ...firstBun!, count: 1 });
   const previousState: IIngredientsSlice = {
     status: "succeeded",
@@ -132,7 +132,7 @@ test("should handle setting bun's qty to 0", () => {
   const newFirstBunIndex = expectedIngredients.findIndex(
     (el) => el.type === "bun"
   );
-  // delete from the copied array first bun and add new bun with qty: 0 to the same postiion
+  // delete from the copied array first bun and add new bun with count: 0 to the same postiion
   expectedIngredients.splice(newFirstBunIndex, 1, { ...newFirstBun!, count: 0 });
   expect(reducer(previousState, changeBun())).toEqual({
     status: "succeeded",
