@@ -2,14 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getIngredientsRequest } from "../../utils/api";
 import { TIngredient } from "../../utils/types/ingredients-types";
 
-interface IIngredientsSlice {
+export interface IIngredientsSlice {
   status: string;
   ingredients: Array<TIngredient>;
   ingredientsLoaded: boolean;
   error: unknown;
 }
 
-const initialState: IIngredientsSlice = {
+export const initialState: IIngredientsSlice = {
   status: "uninitialized",
   ingredients: [],
   ingredientsLoaded: false,
@@ -30,17 +30,17 @@ export const ingredientsSlice = createSlice({
   reducers: {
     counterIncrease(state, action) {
       state.ingredients = state.ingredients.map((el) =>
-        el._id === action.payload ? { ...el, qty: el.count + 1 } : el
+        el._id === action.payload ? { ...el, count: el.count + 1 } : el
       );
     },
     counterDecrease(state, action) {
       state.ingredients = state.ingredients.map((el) =>
-        el._id === action.payload ? { ...el, qty: el.count - 1 } : el
+        el._id === action.payload ? { ...el, count: el.count - 1 } : el
       );
     },
     changeBun(state) {
       state.ingredients = state.ingredients.map((el) =>
-        el.type === "bun" ? { ...el, qty: 0 } : el
+        el.type === "bun" ? { ...el, count: 0 } : el
       );
     },
   },

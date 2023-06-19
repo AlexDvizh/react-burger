@@ -2,7 +2,7 @@ import ingredientsReducer from "./ingredients";
 import constructorReducer from "./constructor";
 import orderReducer from "./order";
 import authReducer from "./auth";
-import { wsFeedReducer } from "../reducers/ws-feed";
+import wsFeedReducer from "../reducers/ws-feed";
 import { configureStore } from "@reduxjs/toolkit";
 import { socketMiddleware } from "../socketMiddleware";
 

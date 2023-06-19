@@ -1,11 +1,6 @@
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useMemo } from 'react';
-// import {
-//     INGREDIENTS_COUNTER_INCREASE, CHANGE_BUN,
-// } from "../../services/actions/ingredients";
-// import { ADD_FILLING, ADD_BUN } from "../../services/slices/ingredients";
 import styles from "./burgerConstructor.module.css";
-import { useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import DragAndDropContainer from './DragAndDropContainer';
 import BurgerConstructorOrder from './BurgerOrder';
@@ -14,7 +9,8 @@ import { RootState } from '../../services/slices';
 import { TIngredient } from '../../utils/types/ingredients-types';
 import { changeBun, counterIncrease } from '../../services/slices/ingredients';
 import { addBun, addFilling } from '../../services/slices/constructor';
-import { nanoid } from '@reduxjs/toolkit';
+import { uuid } from 'uuidv4';
+
 
 function BurgerConstructor(): JSX.Element {
     const { ingredients } = useAppSelector((state: RootState) => state.constructorBurger);
@@ -36,7 +32,7 @@ function BurgerConstructor(): JSX.Element {
             dispatch(addBun(ingredient));
             dispatch(counterIncrease(ingredient._id));
           } else {
-            dispatch(addFilling({ ingredient, uuid: nanoid() }));
+            dispatch(addFilling({ ingredient, uuid: uuid() }));
             dispatch(counterIncrease(ingredient._id));
           }
         },
@@ -45,14 +41,14 @@ function BurgerConstructor(): JSX.Element {
     return (
         // @ts-ignore
         <section className={styles.constructor}>
-            <div className={styles.constructorWrap} ref={dropTarget}>
+            <div className={styles.constructorWrap} ref={dropTarget} data-test="drop-area">
                 { emptyBun 
                     ?
                     <div className={`${styles.emptyConstructorItem} ${styles.bunTop}`}>
                         Выберите булку
                     </div>
                     :
-                    <div className={`${styles.itemWrap} ${styles.constructorItemBun}`}>
+                    <div className={`${styles.itemWrap} ${styles.constructorItemBun}`} data-test="top-bun">
                         <ConstructorElement
                             type="top"
                             isLocked={true}
@@ -72,7 +68,7 @@ function BurgerConstructor(): JSX.Element {
                         Выберите булку
                     </div>
                     :
-                    <div className={`${styles.itemWrap} ${styles.constructorItemBun}`}>
+                    <div className={`${styles.itemWrap} ${styles.constructorItemBun}`} data-test="bottom-bun">
                         <ConstructorElement
                             type="bottom"
                             isLocked={true}

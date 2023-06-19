@@ -118,6 +118,7 @@ function DragAndDropItem({ ingredient, index }: { ingredient: TIngredientWithUni
         className={styles.itemWrap}
         ref={ref}
         data-handler-id={handlerId}
+        data-test="filling"
         >
             <DragIcon type="primary" />
             <ConstructorElement

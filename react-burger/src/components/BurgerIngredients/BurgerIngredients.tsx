@@ -45,7 +45,7 @@ const BurgerIngredients = () => {
     };
    
     return (
-        <section className={styles.burgerIngredients}>
+        <section className={styles.burgerIngredients} data-test="ingredients">
             <h1 className={`text text_type_main-large ${styles.burgerIngredientsTitle}`}>Соберите бургер</h1>
             <nav className={styles.ingredientsList}>
                 <Tab 
@@ -81,19 +81,19 @@ const BurgerIngredients = () => {
             </nav>
             <div className={`${styles.scrollableBox} mt-10`}>
                 <h2 className={`text text_type_main-medium ${styles.title}`} id="bun_tab_header">Булки</h2>
-                <div className={styles.burgerIngredientList} id="bun_tab">
+                <div className={styles.burgerIngredientList} id="bun_tab" data-test="bun">
                     {bunArr.map((bun) => (
                         <BurgerIngredient ingredient={bun} key={bun._id}/>
                     ))}
                 </div>
                 <h2 className={`text text_type_main-medium ${styles.title}`} id="sauce_tab_header">Соусы</h2>
-                <div className={styles.burgerIngredientList} id="sauce_tab">
+                <div className={styles.burgerIngredientList} id="sauce_tab" data-test="sauce">
                     {sauceArr.map((sauce) => {
                         return <BurgerIngredient ingredient={sauce} key={sauce._id}/>
                     })}
                 </div>
                 <h2 className={`text text_type_main-medium ${styles.title}`} id="main_tab_header">Начинки</h2>
-                <div className={styles.burgerIngredientList} id="main_tab">
+                <div className={styles.burgerIngredientList} id="main_tab" data-test="main">
                     {meatArr.map((main) => {
                         return <BurgerIngredient ingredient={main} key={main._id}/>
                     })}

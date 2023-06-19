@@ -9,7 +9,7 @@ import {
 
 import { WebSocketStatus, IWSOrder } from "../types/web-socket";
 
-interface IWSProfileReducer {
+export interface IWSProfileReducer {
   status: WebSocketStatus;
   orders: Array<IWSOrder>;
   error: unknown;
@@ -43,3 +43,5 @@ export const wsProfileReducer = createReducer(initialState, (builder) => {
       state.ordersProfileLoaded = action.payload.dataReceived;
     });
 });
+
+export default wsProfileReducer;

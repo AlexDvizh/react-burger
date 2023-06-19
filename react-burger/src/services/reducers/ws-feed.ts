@@ -9,7 +9,7 @@ import {
 
 import { WebSocketStatus, IWSOrder } from "../types/web-socket";
 
-interface IWSFeedReducer {
+export interface IWSFeedReducer {
   status: WebSocketStatus;
   orders: Array<IWSOrder>;
   total: number | undefined;
@@ -49,3 +49,5 @@ export const wsFeedReducer = createReducer(initialState, (builder) => {
       state.ordersFeedLoaded = action.payload.dataReceived;
     });
 });
+
+export default wsFeedReducer;

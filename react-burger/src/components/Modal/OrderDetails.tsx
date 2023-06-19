@@ -9,7 +9,7 @@ function OrderDetails(): JSX.Element {
     const { orderId, status } = useAppSelector((state: RootState) => state.order)
     
     return (
-        <div className={styles.contentWrap}>
+        <div className={styles.contentWrap} data-test="order-details">
             {status === "loading" ? (
                 <p className={`text text_type_main-medium ${styles.order_id}`}>
                 Подождите, скоро появится номер заказа

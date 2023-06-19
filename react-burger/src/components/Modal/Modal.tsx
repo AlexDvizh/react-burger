@@ -46,7 +46,7 @@ function Modal({
             <ModalOverlay onClose={handleModalClose}/>
             <div className={styles.modal}>
                 <div className={styles.modalWrap}>
-                    <div className={styles.modalHeader}>
+                    <div className={styles.modalHeader} data-test="modal-title">
                         { title ? 
                             <h1 className={`text text_type_main-large ${styles.modalTitle}`}>{title}</h1>
                             :

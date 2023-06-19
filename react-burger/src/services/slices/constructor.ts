@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TIngredientsConstructor } from "../../utils/types/ingredients-types";
 
-interface IConstructorSlice {
+export interface IConstructorSlice {
   ingredients: TIngredientsConstructor;
 }
 
-const initialState: IConstructorSlice = {
+export const initialState: IConstructorSlice = {
   ingredients: {
     bun: {},
     fillings: [],
@@ -22,13 +22,13 @@ const constructorSlice = createSlice({
     addFilling(state, action) {
       state.ingredients.fillings.push({
         ...action.payload.ingredient,
-        nanoid: action.payload.nanoid,
+        uuid: action.payload.uuid,
       });
       console.log(action.payload);
     },
     deleteFilling(state, action) {
       state.ingredients.fillings = state.ingredients.fillings.filter(
-        (el) => el.nanoid !== action.payload
+        (el) => el.uuid !== action.payload
       );
     },
     moveFilling(state, action) {

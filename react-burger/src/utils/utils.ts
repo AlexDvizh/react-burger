@@ -89,13 +89,13 @@ export const INGREDIENT_MODAL_TITLE = "Детали ингредиента";
            url: ingredient?.image_mobile,
            price: ingredient?.price,
            name: ingredient?.name,
-           qty: 1,
+           count: 1,
          });
          checkedId.push(id);
        } else {
          urlPriceName.forEach((item, index) => {
            if (item._id === id) {
-             urlPriceName[index].qty += 1;
+             urlPriceName[index].count += 1;
            }
          });
        }
